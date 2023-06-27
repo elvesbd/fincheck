@@ -1,5 +1,7 @@
+import { User } from '@prisma/client';
 import { CreateUserDto } from '../dto/create-user.dto';
 
 export interface UserRepository {
-  create(createUserDto: CreateUserDto): Promise<any>;
+  create(createUserDto: CreateUserDto): Promise<User>;
+  findUnique(email: string): Promise<Partial<User>>;
 }
