@@ -8,7 +8,7 @@ import { UserRepository } from 'src/modules/users/repository/user-repository.int
 export class UserRepositoryPrismaAdapter implements UserRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findUnique(email: string): Promise<Partial<User>> {
+  async findByEmail(email: string): Promise<Partial<User>> {
     return await this.prismaService.user.findUnique({
       where: { email },
       select: { id: true },

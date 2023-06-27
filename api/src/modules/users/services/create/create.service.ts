@@ -14,25 +14,29 @@ export class CreateUserService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<CreateUserResponseDto> {
-    const { email, password } = createUserDto;
+    try {
+      const { email, password } = createUserDto;
 
-    const emailExists = await this.userRepository.findUnique(email);
-    if (emailExists) {
-      throw new ConflictException('This email is already in use');
+      const emailExists = await this.userRepository.findByEmail(email);
+      if (emailExists) {
+        throw new ConflictException('This email is already in use');
+      }
+
+      const hashedPassword = await this.hash.generate(password, 10);
+      const data = {
+        ...createUserDto,
+        password: hashedPassword,
+      };
+
+      const user = await this.userRepository.create(data);
+
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      };
+    } catch (error) {
+      console.error(error);
     }
-
-    const hashedPassword = await this.hash.generate(password, 10);
-    const data = {
-      ...createUserDto,
-      password: hashedPassword,
-    };
-
-    const user = await this.userRepository.create(data);
-
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    };
   }
 }
