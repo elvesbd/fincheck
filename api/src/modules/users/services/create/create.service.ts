@@ -1,8 +1,8 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { Hash } from 'src/shared/adapters/cryptography/interfaces/hash.interface';
-import { CreateUserResponseDto } from 'src/users/dto/create-user-response.dto';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { UserRepository } from 'src/users/repository/user-repository.interface';
+import { CreateUserResponseDto } from '../../dto/create-user-response.dto';
+import { CreateUserDto } from '../../dto/create-user.dto';
+import { UserRepository } from '../../repository/user-repository.interface';
 
 @Injectable()
 export class CreateUserService {

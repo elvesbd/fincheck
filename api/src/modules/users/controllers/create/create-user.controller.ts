@@ -1,8 +1,8 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { API_PATH } from '../constants.controller';
-import { CreateUserService } from 'src/users/services/create/create.service';
-import { CreateUserResponseDto } from 'src/users/dto/create-user-response.dto';
+import { CreateUserResponseDto } from '../../dto/create-user-response.dto';
+import { CreateUserDto } from '../../dto/create-user.dto';
+import { CreateUserService } from '../../services/create/create.service';
 
 @Controller(API_PATH)
 export class CreateUserController {
