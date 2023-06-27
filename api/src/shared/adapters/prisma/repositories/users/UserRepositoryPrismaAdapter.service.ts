@@ -9,8 +9,9 @@ export class UserRepositoryPrismaAdapter implements UserRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const { name, email, password } = createUserDto;
     return await this.prismaService.user.create({
-      data: createUserDto,
+      data: { name, email, password },
     });
   }
 }
