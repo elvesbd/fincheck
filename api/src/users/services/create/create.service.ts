@@ -1,5 +1,4 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
 import { Hash } from 'src/shared/adapters/cryptography/interfaces/hash.interface';
 import { CreateUserResponseDto } from 'src/users/dto/create-user-response.dto';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
