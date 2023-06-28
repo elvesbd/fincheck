@@ -1,9 +1,10 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { SigninDto } from '../../dto/signin.dto';
 import { UserRepository } from 'src/modules/users/repository/user-repository.interface';
 import { Hasher } from 'src/shared/adapters/cryptography/interfaces/hasher.interface';
 import { Encrypt } from 'src/shared/adapters/cryptography/jwt/interfaces/encrypt.interface';
 import { EncryptedPayloadDto } from 'src/shared/adapters/cryptography/jwt/dto/encrypted-payload.dto';
+import { SigninResponseDto } from '../../dto/signin/signin-response.dto';
+import { SigninDto } from '../../dto/signin/signin.dto';
 
 @Injectable()
 export class SigninService {
@@ -16,7 +17,7 @@ export class SigninService {
     private readonly encrypt: Encrypt,
   ) {}
 
-  async execute(signinDto: SigninDto): Promise<any> {
+  async execute(signinDto: SigninDto): Promise<SigninResponseDto> {
     const { email, password } = signinDto;
 
     const user = await this.userRepository.findByEmail(email);
