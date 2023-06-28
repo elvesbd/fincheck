@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { SignupDto } from 'src/modules/auth/dto/signup.dto';
 
 export interface UserRepository {
-  create(createUserDto: CreateUserDto): Promise<User>;
+  create(signupDto: SignupDto): Promise<User>;
   findByEmail(email: string): Promise<Partial<User>>;
 }

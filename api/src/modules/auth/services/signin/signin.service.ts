@@ -16,7 +16,7 @@ export class SigninService {
     private readonly encrypt: Encrypt,
   ) {}
 
-  async authenticate(signinDto: SigninDto): Promise<any> {
+  async execute(signinDto: SigninDto): Promise<any> {
     const { email, password } = signinDto;
 
     const user = await this.userRepository.findByEmail(email);
