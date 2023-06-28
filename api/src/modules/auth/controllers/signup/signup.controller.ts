@@ -2,8 +2,9 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { SignupService } from '../../services/signup/signup.service';
 import { SignupDto } from '../../dto/signup.dto';
 import { SignupResponseDto } from '../../dto/signup/signup-response.dto';
+import { API_PATH } from '../constants.controller';
 
-@Controller('auth')
+@Controller(API_PATH)
 export class SignupController {
   constructor(private readonly signupService: SignupService) {}
 

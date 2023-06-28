@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CreateUserController } from './controllers/create/create-user.controller';
-import { CreateUserService } from './services/create/create.service';
 import { UserRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/users/user-repository-prisma-adapter.service';
 import { BcryptAdapter } from 'src/shared/adapters/cryptography/bcrypt/bcrypt-adapter.service';
+import { GetUserByIdService } from './services/get-by-id/get-by-id.service';
+import { GetUserByIdController } from './controllers/get-by-id/get-by-id.controller';
 
 @Module({
-  controllers: [CreateUserController],
+  controllers: [GetUserByIdController],
   providers: [
     {
       provide: 'USER_REPOSITORY',
@@ -15,7 +15,7 @@ import { BcryptAdapter } from 'src/shared/adapters/cryptography/bcrypt/bcrypt-ad
       provide: 'HASHER',
       useClass: BcryptAdapter,
     },
-    CreateUserService,
+    GetUserByIdService,
   ],
 })
 export class UsersModule {}

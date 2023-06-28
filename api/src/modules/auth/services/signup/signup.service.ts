@@ -26,17 +26,12 @@ export class SignupService {
     }
 
     const hashedPassword = await this.generatePasswordHash(password);
-
     const data = {
       ...signupDto,
       password: hashedPassword,
     };
-    const newUser = await this.userRepository.create(data);
-
-    const payload: EncryptedPayloadDto = {
-      sub: newUser.id,
-    };
-    const accessToken = await this.generateAccessToken(payload);
+    const { id } = await this.userRepository.create(data);
+    const accessToken = await this.generateAccessToken(id);
 
     return { accessToken };
   }
@@ -45,9 +40,10 @@ export class SignupService {
     return this.hasher.hash(password, 10);
   }
 
-  private async generateAccessToken(
-    payload: EncryptedPayloadDto,
-  ): Promise<string> {
+  private async generateAccessToken(userId: string): Promise<string> {
+    const payload: EncryptedPayloadDto = {
+      sub: userId,
+    };
     return this.encrypt.signAsync(payload);
   }
 }
