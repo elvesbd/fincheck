@@ -11,7 +11,6 @@ export class UserRepositoryPrismaAdapter implements UserRepository {
   async findByEmail(email: string): Promise<Partial<User>> {
     return await this.prismaService.user.findUnique({
       where: { email },
-      select: { id: true },
     });
   }
 

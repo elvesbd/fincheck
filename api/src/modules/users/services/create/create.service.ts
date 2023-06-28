@@ -1,5 +1,5 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
-import { Hash } from 'src/shared/adapters/cryptography/interfaces/hash.interface';
+import { Hasher } from 'src/shared/adapters/cryptography/interfaces/hasher.interface';
 import { CreateUserResponseDto } from '../../dto/create-user-response.dto';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { UserRepository } from '../../repository/user-repository.interface';
@@ -9,31 +9,31 @@ export class CreateUserService {
   constructor(
     @Inject('USER_REPOSITORY')
     private readonly userRepository: UserRepository,
-    @Inject('HASH')
-    private readonly hash: Hash,
+    @Inject('HASHER')
+    private readonly hasher: Hasher,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<CreateUserResponseDto> {
     try {
       const { email, password } = createUserDto;
 
-      const emailExists = await this.userRepository.findByEmail(email);
-      if (emailExists) {
+      const user = await this.userRepository.findByEmail(email);
+      if (user.email) {
         throw new ConflictException('This email is already in use');
       }
 
-      const hashedPassword = await this.hash.generate(password, 10);
+      const hashedPassword = await this.hasher.hash(password, 10);
       const data = {
         ...createUserDto,
         password: hashedPassword,
       };
 
-      const user = await this.userRepository.create(data);
+      const newUser = await this.userRepository.create(data);
 
       return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
       };
     } catch (error) {
       console.error(error);
