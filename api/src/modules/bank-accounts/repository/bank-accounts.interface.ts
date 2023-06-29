@@ -2,4 +2,5 @@ import { CreateBankAccountDto } from '../controllers/create/dto/create-bank-acco
 
 export interface BankAccountsRepository {
   create(id: string, createBankAccountDto: CreateBankAccountDto): Promise<any>;
+  findByUserId(id: string): Promise<any>;
 }

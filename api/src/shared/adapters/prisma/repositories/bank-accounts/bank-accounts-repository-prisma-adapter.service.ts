@@ -25,4 +25,10 @@ export class BankAccountsRepositoryPrismaAdapter
       },
     });
   }
+
+  findByUserId(id: string): Promise<any> {
+    return this.prismaService.bankAccount.findMany({
+      where: { userId: id },
+    });
+  }
 }

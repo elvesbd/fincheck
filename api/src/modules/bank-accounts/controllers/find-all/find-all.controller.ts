@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { FindAllBankAccountsService } from '../../services/find-all/find-all.service';
+import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 
 @Controller('bank-accounts')
 export class FinAllBankAccountsController {
@@ -8,7 +9,7 @@ export class FinAllBankAccountsController {
   ) {}
 
   @Get()
-  create() {
-    return this.finAllBankAccountsService.execute();
+  findAll(@ExtractUserId() id: string) {
+    return this.finAllBankAccountsService.execute(id);
   }
 }
