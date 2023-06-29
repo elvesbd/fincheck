@@ -1,12 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../service/prisma.service';
-import { User } from '@prisma/client';
-import { CreateUserDto } from 'src/modules/users/dto/create-user.dto';
+import { Prisma, User } from '@prisma/client';
 import { UserRepository } from 'src/modules/users/repository/user-repository.interface';
+import { SignupDto } from 'src/modules/auth/dto/signup/signup.dto';
 
 @Injectable()
 export class UserRepositoryPrismaAdapter implements UserRepository {
   constructor(private readonly prismaService: PrismaService) {}
+
+  async findById(id: string): Promise<Partial<User>> {
+    return await this.prismaService.user.findUnique({
+      where: { id },
+    });
+  }
 
   async findByEmail(email: string): Promise<Partial<User>> {
     return await this.prismaService.user.findUnique({
@@ -14,8 +20,8 @@ export class UserRepositoryPrismaAdapter implements UserRepository {
     });
   }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const { name, email, password } = createUserDto;
+  async create(signupDto: SignupDto): Promise<User> {
+    const { name, email, password } = signupDto;
     return await this.prismaService.user.create({
       data: {
         name,
