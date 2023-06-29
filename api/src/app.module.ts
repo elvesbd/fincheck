@@ -7,7 +7,13 @@ import { AuthGuard } from './modules/auth/guards/auth.guard';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { BankAccountsModule } from './modules/bank-accounts/bank-accounts.module';
 @Module({
-  imports: [UsersModule, SharedModule, AuthModule, CategoriesModule, BankAccountsModule],
+  imports: [
+    UsersModule,
+    SharedModule,
+    AuthModule,
+    CategoriesModule,
+    BankAccountsModule,
+  ],
   controllers: [],
   providers: [
     {

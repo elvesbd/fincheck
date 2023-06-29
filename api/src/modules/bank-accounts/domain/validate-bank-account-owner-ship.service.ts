@@ -1,8 +1,8 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { BankAccountsRepository } from '../../repository/bank-accounts.interface';
+import { BankAccountsRepository } from '../repository/bank-accounts.interface';
 
 @Injectable()
-export class RemoveBankAccountsService {
+export class ValidateBankAccountOwnerShipService {
   constructor(
     @Inject('BANK_ACCOUNTS_REPOSITORY')
     private readonly bankAccountsRepository: BankAccountsRepository,
@@ -17,7 +17,5 @@ export class RemoveBankAccountsService {
     if (!isOwner) {
       throw new NotFoundException('Bank account not found');
     }
-
-    return this.bankAccountsRepository.remove(id);
   }
 }

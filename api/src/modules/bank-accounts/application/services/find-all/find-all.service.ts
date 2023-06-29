@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { BankAccountsRepository } from '../../repository/bank-accounts.interface';
+import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
 
 @Injectable()
 export class FindAllBankAccountsService {
