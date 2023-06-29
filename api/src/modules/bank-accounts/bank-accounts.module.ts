@@ -7,6 +7,7 @@ import { FindAllBankAccountsService } from './services/find-all/find-all.service
 import { RemoveBankAccountsService } from './services/remove/remove.service';
 import { UpdateBankAccountsService } from './services/update/update.service';
 import { RemoveBankAccountsController } from './controllers/remove/remove.controller';
+import { BankAccountsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/bank-accounts/bank-accounts-repository-prisma-adapter.service';
 
 const bankAccountsControllers = [
   CreateBankAccountsController,
@@ -23,6 +24,12 @@ const bankAccountsServices = [
 
 @Module({
   controllers: [...bankAccountsControllers],
-  providers: [...bankAccountsServices],
+  providers: [
+    {
+      provide: 'BANK_ACCOUNTS_REPOSITORY',
+      useClass: BankAccountsRepositoryPrismaAdapter,
+    },
+    ...bankAccountsServices,
+  ],
 })
 export class BankAccountsModule {}
