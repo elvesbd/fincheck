@@ -15,8 +15,8 @@ export class RemoveBankAccountsController {
     private readonly removeBankAccountsService: RemoveBankAccountsService,
   ) {}
 
-  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(
     @Param('id', ParseUUIDPipe) id: string,
     @ExtractUserId() userId: string,
