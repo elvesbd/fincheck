@@ -2,6 +2,7 @@ import {
   Controller,
   Delete,
   HttpCode,
+  HttpStatus,
   Param,
   ParseUUIDPipe,
 } from '@nestjs/common';
@@ -14,7 +15,7 @@ export class RemoveBankAccountsController {
     private readonly removeBankAccountsService: RemoveBankAccountsService,
   ) {}
 
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   remove(
     @Param('id', ParseUUIDPipe) id: string,
