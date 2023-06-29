@@ -1,6 +1,7 @@
 import { Controller, Body, Put, Param } from '@nestjs/common';
 import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
 import { UpdateBankAccountsService } from '../../services/update/update.service';
+import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 
 @Controller('bank-accounts')
 export class UpdateBankAccountsController {
@@ -11,8 +12,13 @@ export class UpdateBankAccountsController {
   @Put(':id')
   Update(
     @Param('id') id: string,
+    @ExtractUserId() userId: string,
     @Body() updateBankAccountDto: UpdateBankAccountDto,
   ) {
-    return this.updateBankAccountsService.execute(id, updateBankAccountDto);
+    return this.updateBankAccountsService.execute(
+      id,
+      userId,
+      updateBankAccountDto,
+    );
   }
 }
