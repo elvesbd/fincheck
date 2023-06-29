@@ -1,5 +1,12 @@
-import { Controller, Delete, Param } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  HttpCode,
+  Param,
+  ParseUUIDPipe,
+} from '@nestjs/common';
 import { RemoveBankAccountsService } from '../../services/remove/remove.service';
+import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 
 @Controller('bank-accounts')
 export class RemoveBankAccountsController {
@@ -7,8 +14,12 @@ export class RemoveBankAccountsController {
     private readonly removeBankAccountsService: RemoveBankAccountsService,
   ) {}
 
+  @HttpCode(204)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.removeBankAccountsService.execute(id);
+  remove(
+    @Param('id', ParseUUIDPipe) id: string,
+    @ExtractUserId() userId: string,
+  ): Promise<void> {
+    return this.removeBankAccountsService.execute(id, userId);
   }
 }

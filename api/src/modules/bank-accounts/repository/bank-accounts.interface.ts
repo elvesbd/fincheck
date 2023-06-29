@@ -13,4 +13,5 @@ export interface BankAccountsRepository {
     id: string,
     updateBankAccountDto: UpdateBankAccountDto,
   ): Promise<BankAccountResponseDto>;
+  remove(id: string): Promise<void>;
 }

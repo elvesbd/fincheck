@@ -12,17 +12,17 @@ export class BankAccountsRepositoryPrismaAdapter
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  findByUserId(id: string): Promise<BankAccountResponseDto[]> {
-    return this.prismaService.bankAccount.findMany({
+  async findByUserId(id: string): Promise<BankAccountResponseDto[]> {
+    return await this.prismaService.bankAccount.findMany({
       where: { userId: id },
     });
   }
 
-  findOneByIdAndUserId(
+  async findOneByIdAndUserId(
     id: string,
     userId: string,
   ): Promise<BankAccountResponseDto> {
-    return this.prismaService.bankAccount.findFirst({
+    return await this.prismaService.bankAccount.findFirst({
       where: {
         id,
         userId,
@@ -30,12 +30,12 @@ export class BankAccountsRepositoryPrismaAdapter
     });
   }
 
-  create(
+  async create(
     id: string,
     createBankAccountDto: CreateBankAccountDto,
   ): Promise<BankAccount> {
     const { name, initialBalance, type, color } = createBankAccountDto;
-    return this.prismaService.bankAccount.create({
+    return await this.prismaService.bankAccount.create({
       data: {
         userId: id,
         name,
@@ -46,12 +46,12 @@ export class BankAccountsRepositoryPrismaAdapter
     });
   }
 
-  update(
+  async update(
     id: string,
     updateBankAccountDto: UpdateBankAccountDto,
   ): Promise<BankAccountResponseDto> {
     const { name, initialBalance, type, color } = updateBankAccountDto;
-    return this.prismaService.bankAccount.update({
+    return await this.prismaService.bankAccount.update({
       where: { id },
       data: {
         name,
@@ -59,6 +59,12 @@ export class BankAccountsRepositoryPrismaAdapter
         type,
         color,
       },
+    });
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.prismaService.bankAccount.delete({
+      where: { id },
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Body, Put, Param } from '@nestjs/common';
+import { Controller, Body, Put, Param, ParseUUIDPipe } from '@nestjs/common';
 import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
 import { UpdateBankAccountsService } from '../../services/update/update.service';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
@@ -11,7 +11,7 @@ export class UpdateBankAccountsController {
 
   @Put(':id')
   Update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @ExtractUserId() userId: string,
     @Body() updateBankAccountDto: UpdateBankAccountDto,
   ) {

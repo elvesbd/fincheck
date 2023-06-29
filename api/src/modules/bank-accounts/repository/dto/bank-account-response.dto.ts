@@ -1,5 +1,3 @@
-import { BankAccountType } from '../../enums/type.enum';
-
 export class BankAccountResponseDto {
   id: string;
   userId: string;
