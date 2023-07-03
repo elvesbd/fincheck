@@ -6,8 +6,8 @@ import {
   Param,
   ParseUUIDPipe,
 } from '@nestjs/common';
-import { RemoveBankAccountsService } from '../../services/remove/remove.service';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
+import { RemoveBankAccountsService } from '../../application/services/remove/remove.service';
 
 @Controller('bank-accounts')
 export class RemoveBankAccountsController {
