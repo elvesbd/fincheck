@@ -3,7 +3,10 @@ import { UpdateBankAccountDto } from '../controllers/update/dto/update-bank-acco
 import { BankAccountResponseDto } from './dto/bank-account-response.dto';
 
 export interface BankAccountsRepository {
-  create(id: string, createBankAccountDto: CreateBankAccountDto): Promise<any>;
+  create(
+    id: string,
+    createBankAccountDto: CreateBankAccountDto,
+  ): Promise<BankAccountResponseDto>;
   findByUserId(id: string): Promise<BankAccountResponseDto[]>;
   findOneByIdAndUserId(
     id: string,

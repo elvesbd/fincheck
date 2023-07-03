@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { FindAllCategoriesByUserIdService } from './services/find-all-by-user-id/find-all-by-user-id.service';
 import { FindAllCategoriesByUserIdController } from './controllers/find-all-by-user-id/find-all-by-user-id.controller';
 import { CategoriesRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/categories/categories-repository-prisma-adapter.service';
+import { FindAllCategoriesByUserIdService } from './application/services/find-all-by-user-id/find-all-by-user-id.service';
+import { ValidateCategoryOwnerShipService } from './domain/validate-category-owner-ship.service';
 
 @Module({
   controllers: [FindAllCategoriesByUserIdController],
@@ -11,6 +12,8 @@ import { CategoriesRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/re
       useClass: CategoriesRepositoryPrismaAdapter,
     },
     FindAllCategoriesByUserIdService,
+    ValidateCategoryOwnerShipService,
   ],
+  exports: [ValidateCategoryOwnerShipService, 'CATEGORIES_REPOSITORY'],
 })
 export class CategoriesModule {}

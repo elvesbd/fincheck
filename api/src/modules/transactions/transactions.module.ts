@@ -12,6 +12,13 @@ import {
   RemoveTransactionsController,
 } from './controllers';
 import { TransactionsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/transactions/transactions-repository-prisma-adapter.service';
+import { ValidateBankAccountOwnerShipService } from '../bank-accounts/domain/validate-bank-account-owner-ship.service';
+import { BankAccountsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/bank-accounts/bank-accounts-repository-prisma-adapter.service';
+import { CategoriesRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/categories/categories-repository-prisma-adapter.service';
+import { ValidateCategoryOwnerShipService } from '../categories/domain/validate-category-owner-ship.service';
+import { CategoriesModule } from '../categories/categories.module';
+import { BankAccountsModule } from '../bank-accounts/bank-accounts.module';
+import { ValidateEntitiesOwnerShipService } from './domain/validate-entites-ownership.service';
 
 const controllers = [
   CreateTransactionsController,
@@ -24,13 +31,17 @@ const providers = [
   FindAllTransactionsService,
   UpdateTransactionsService,
   RemoveTransactionsService,
+  ValidateEntitiesOwnerShipService,
+  ValidateBankAccountOwnerShipService,
+  ValidateCategoryOwnerShipService,
 ];
 
 @Module({
+  imports: [CategoriesModule, BankAccountsModule],
   controllers: [...controllers],
   providers: [
     {
-      provide: 'TRANSACTION_REPOSITORY',
+      provide: 'TRANSACTIONS_REPOSITORY',
       useClass: TransactionsRepositoryPrismaAdapter,
     },
     ...providers,

@@ -2,6 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { API_PATH } from '../transactions-constants.controller';
 import { CreateTransactionsService } from '../../application/services';
+import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 
 @Controller(API_PATH)
 export class CreateTransactionsController {
@@ -10,7 +11,10 @@ export class CreateTransactionsController {
   ) {}
 
   @Post()
-  create(@Body() createTransactionDto: CreateTransactionDto) {
-    return this.createTransactionsService.create(createTransactionDto);
+  create(
+    @ExtractUserId() userId: string,
+    @Body() createTransactionDto: CreateTransactionDto,
+  ) {
+    return this.createTransactionsService.create(userId, createTransactionDto);
   }
 }

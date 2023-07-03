@@ -7,7 +7,6 @@ import { Request } from 'express';
 
 export const ExtractUserId = createParamDecorator<undefined>(
   (data, ctx: ExecutionContext) => {
-    console.log('extract');
     const request: Request = ctx.switchToHttp().getRequest();
     const userId = request.userId;
 

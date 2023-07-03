@@ -4,7 +4,7 @@ import { TransactionsRepository } from 'src/modules/transactions/repository';
 @Injectable()
 export class FindAllTransactionsService {
   constructor(
-    @Inject('TRANSACTION_REPOSITORY')
+    @Inject('TRANSACTIONS_REPOSITORY')
     private readonly transactionRepository: TransactionsRepository,
   ) {}
 

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CategoriesRepository } from '../../repository/categories-repository.interface';
+import { CategoriesRepository } from 'src/modules/categories/repository/categories-repository.interface';
 
 @Injectable()
 export class FindAllCategoriesByUserIdService {

@@ -33,6 +33,6 @@ const bankAccountsServices = [
     },
     ...bankAccountsServices,
   ],
-  exports: [ValidateBankAccountOwnerShipService],
+  exports: [ValidateBankAccountOwnerShipService, 'BANK_ACCOUNTS_REPOSITORY'],
 })
 export class BankAccountsModule {}

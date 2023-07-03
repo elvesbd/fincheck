@@ -12,7 +12,7 @@ export class BankAccountsRepositoryPrismaAdapter
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findByUserId(id: string): Promise<BankAccountResponseDto[]> {
+  async findByUserId(id: string): Promise<BankAccount[]> {
     return await this.prismaService.bankAccount.findMany({
       where: { userId: id },
     });
@@ -49,7 +49,7 @@ export class BankAccountsRepositoryPrismaAdapter
   async update(
     id: string,
     updateBankAccountDto: UpdateBankAccountDto,
-  ): Promise<BankAccountResponseDto> {
+  ): Promise<BankAccount> {
     const { name, initialBalance, type, color } = updateBankAccountDto;
     return await this.prismaService.bankAccount.update({
       where: { id },
