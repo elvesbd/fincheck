@@ -1,8 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { TransactionsRepository } from 'src/modules/transactions/repository';
 
 @Injectable()
 export class FindAllTransactionsService {
-  findAll() {
-    return `This action returns all transactions`;
+  constructor(
+    @Inject('TRANSACTION_REPOSITORY')
+    private readonly transactionRepository: TransactionsRepository,
+  ) {}
+
+  async findAll(userId: string) {
+    return await this.transactionRepository.findAll(userId);
   }
 }

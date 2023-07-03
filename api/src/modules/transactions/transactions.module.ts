@@ -11,6 +11,7 @@ import {
   UpdateTransactionsController,
   RemoveTransactionsController,
 } from './controllers';
+import { TransactionsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/transactions/transactions-repository-prisma-adapter.service';
 
 const controllers = [
   CreateTransactionsController,
@@ -27,6 +28,12 @@ const providers = [
 
 @Module({
   controllers: [...controllers],
-  providers: [...providers],
+  providers: [
+    {
+      provide: 'TRANSACTION_REPOSITORY',
+      useClass: TransactionsRepositoryPrismaAdapter,
+    },
+    ...providers,
+  ],
 })
 export class TransactionsModule {}

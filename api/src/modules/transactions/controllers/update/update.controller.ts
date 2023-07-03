@@ -14,6 +14,6 @@ export class UpdateTransactionsController {
     @Param('id') id: string,
     @Body() updateTransactionDto: UpdateTransactionDto,
   ) {
-    return this.updateTransactionsService.update(+id, updateTransactionDto);
+    return this.updateTransactionsService.update(id, updateTransactionDto);
   }
 }
