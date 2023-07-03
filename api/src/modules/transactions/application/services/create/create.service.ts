@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTransactionDto } from 'src/modules/transactions/controllers/create/dto/create-transaction.dto';
+import { CreateTransactionDto } from 'src/modules/transactions/controllers';
 
 @Injectable()
 export class CreateTransactionsService {

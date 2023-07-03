@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import {
-  FindAllTransactionsController,
-  UpdateTransactionsController,
-  RemoveTransactionsController,
-  CreateTransactionsController,
-} from './controllers';
-import {
   CreateTransactionsService,
   FindAllTransactionsService,
   UpdateTransactionsService,
   RemoveTransactionsService,
 } from './application/services';
+import {
+  CreateTransactionsController,
+  FindAllTransactionsController,
+  UpdateTransactionsController,
+  RemoveTransactionsController,
+} from './controllers';
 
 const controllers = [
   CreateTransactionsController,
