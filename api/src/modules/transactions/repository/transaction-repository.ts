@@ -15,4 +15,5 @@ export interface TransactionsRepository {
     transactionId: string,
     updateTransactionDto: UpdateTransactionDto,
   ): Promise<TransactionResponseDto>;
+  remove(transactionId: string): Promise<void>;
 }

@@ -24,8 +24,10 @@ export class ValidateEntitiesOwnerShipService {
           transactionId,
           userId,
         ),
-      this.validateBankAccountOwnerShipService.execute(bankAccountId, userId),
-      this.validateCategoryOwnerShipService.execute(categoryId, userId),
+      bankAccountId &&
+        this.validateBankAccountOwnerShipService.execute(bankAccountId, userId),
+      categoryId &&
+        this.validateCategoryOwnerShipService.execute(categoryId, userId),
     ]);
   }
 }

@@ -71,4 +71,10 @@ export class TransactionsRepositoryPrismaAdapter
       },
     });
   }
+
+  async remove(transactionId: string): Promise<void> {
+    await this.prismaService.transaction.delete({
+      where: { id: transactionId },
+    });
+  }
 }
