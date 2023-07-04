@@ -24,7 +24,7 @@ export class FindAllTransactionsController {
     @Query('year', ParseIntPipe) year: number,
     @Query('bankAccountId', OptionalParseUUIDPipe) bankAccountId: string,
   ) {
-    const filters: FiltersDto = { month, year };
+    const filters: FiltersDto = { month, year, bankAccountId };
     return this.findAllTransactionsService.findAll(userId, filters);
   }
 }
