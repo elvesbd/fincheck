@@ -9,8 +9,26 @@ export class FindAllBankAccountsService {
   ) {}
 
   async execute(id: string) {
-    return await this.bankAccountsRepository.findTransactionsByUserIdAndAccountId(
-      id,
-    );
+    const bankAccounts =
+      await this.bankAccountsRepository.findTransactionsByUserIdAndAccountId(
+        id,
+      );
+
+    return bankAccounts.map(({ transactions, ...bankAccount }) => {
+      const totalTransactions = transactions.reduce(
+        (acc, transaction) =>
+          acc +
+          (transaction.type === 'INCOME'
+            ? transaction.value
+            : -transaction.value),
+        0,
+      );
+
+      const currentBalance = bankAccount.initialBalance + totalTransactions;
+      return {
+        ...bankAccount,
+        currentBalance,
+      };
+    });
   }
 }

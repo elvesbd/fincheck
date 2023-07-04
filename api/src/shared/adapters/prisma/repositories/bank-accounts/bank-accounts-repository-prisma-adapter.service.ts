@@ -4,7 +4,6 @@ import { CreateBankAccountDto } from 'src/modules/bank-accounts/controllers/crea
 import { BankAccount } from '@prisma/client';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
 import { UpdateBankAccountDto } from 'src/modules/bank-accounts/controllers/update/dto/update-bank-account.dto';
-import { BankAccountResponseDto } from 'src/modules/bank-accounts/repository/dto/bank-account-response.dto';
 
 @Injectable()
 export class BankAccountsRepositoryPrismaAdapter
@@ -28,10 +27,7 @@ export class BankAccountsRepositoryPrismaAdapter
     });
   }
 
-  async findOneByIdAndUserId(
-    id: string,
-    userId: string,
-  ): Promise<BankAccountResponseDto> {
+  async findOneByIdAndUserId(id: string, userId: string): Promise<BankAccount> {
     return await this.prismaService.bankAccount.findFirst({
       where: {
         id,
