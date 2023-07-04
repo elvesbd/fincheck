@@ -12,9 +12,19 @@ export class BankAccountsRepositoryPrismaAdapter
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findByUserId(id: string): Promise<BankAccount[]> {
+  async findTransactionsByUserIdAndAccountId(
+    id: string,
+  ): Promise<BankAccount[]> {
     return await this.prismaService.bankAccount.findMany({
       where: { userId: id },
+      include: {
+        transactions: {
+          select: {
+            type: true,
+            value: true,
+          },
+        },
+      },
     });
   }
 

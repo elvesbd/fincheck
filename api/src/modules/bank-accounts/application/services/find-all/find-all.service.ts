@@ -9,6 +9,8 @@ export class FindAllBankAccountsService {
   ) {}
 
   async execute(id: string) {
-    return await this.bankAccountsRepository.findByUserId(id);
+    return await this.bankAccountsRepository.findTransactionsByUserIdAndAccountId(
+      id,
+    );
   }
 }
