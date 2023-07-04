@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import { FindAllTransactionsService } from '../../application/services/find-all/find-all.service';
 import { API_PATH } from '../transactions-constants.controller';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
+import { FiltersDto } from './dto/filters.dto';
 
 @Controller(API_PATH)
 export class FindAllTransactionsController {
@@ -10,7 +11,12 @@ export class FindAllTransactionsController {
   ) {}
 
   @Get()
-  findAll(@ExtractUserId() userId: string) {
-    return this.findAllTransactionsService.findAll(userId);
+  findAll(
+    @ExtractUserId() userId: string,
+    @Query('month', ParseIntPipe) month: number,
+    @Query('year', ParseIntPipe) year: number,
+  ) {
+    const filters: FiltersDto = { month, year };
+    return this.findAllTransactionsService.findAll(userId, filters);
   }
 }

@@ -7,6 +7,7 @@ import {
   UpdateTransactionDto,
 } from 'src/modules/transactions/controllers';
 import { TransactionResponseDto } from 'src/modules/transactions/repository/dto/transaction-response.dto';
+import { FiltersDto } from 'src/modules/transactions/controllers/find-all/dto/filters.dto';
 
 @Injectable()
 export class TransactionsRepositoryPrismaAdapter
@@ -14,10 +15,15 @@ export class TransactionsRepositoryPrismaAdapter
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findAll(userId: string): Promise<Transaction[]> {
+  async findAll(userId: string, filters: FiltersDto): Promise<Transaction[]> {
+    const { month, year } = filters;
     return await this.prismaService.transaction.findMany({
       where: {
         userId,
+        date: {
+          gte: new Date(year, month),
+          lt: new Date(year, month + 1),
+        },
       },
     });
   }
