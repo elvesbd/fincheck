@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../service/prisma.service';
 import { TransactionsRepository } from 'src/modules/transactions/repository/transaction-repository';
 import { Transaction } from '@prisma/client';
-import { CreateTransactionDto } from 'src/modules/transactions/controllers';
+import {
+  CreateTransactionDto,
+  UpdateTransactionDto,
+} from 'src/modules/transactions/controllers';
+import { TransactionResponseDto } from 'src/modules/transactions/repository/dto/transaction-response.dto';
 
 @Injectable()
 export class TransactionsRepositoryPrismaAdapter
@@ -13,6 +17,18 @@ export class TransactionsRepositoryPrismaAdapter
   async findAll(userId: string): Promise<Transaction[]> {
     return await this.prismaService.transaction.findMany({
       where: {
+        userId,
+      },
+    });
+  }
+
+  async findFirst(
+    transactionId: string,
+    userId: string,
+  ): Promise<TransactionResponseDto> {
+    return await this.prismaService.transaction.findFirst({
+      where: {
+        id: transactionId,
         userId,
       },
     });
@@ -33,6 +49,25 @@ export class TransactionsRepositoryPrismaAdapter
         value,
         date,
         type,
+      },
+    });
+  }
+
+  async update(
+    transactionId: string,
+    updateTransactionDto: UpdateTransactionDto,
+  ): Promise<TransactionResponseDto> {
+    const { bankAccountId, categoryId, date, name, type, value } =
+      updateTransactionDto;
+    return await this.prismaService.transaction.update({
+      where: { id: transactionId },
+      data: {
+        bankAccountId,
+        categoryId,
+        date,
+        name,
+        type,
+        value,
       },
     });
   }

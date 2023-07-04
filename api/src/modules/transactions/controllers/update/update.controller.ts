@@ -1,7 +1,9 @@
-import { Controller, Body, Param, Put } from '@nestjs/common';
+import { Controller, Body, Param, Put, ParseUUIDPipe } from '@nestjs/common';
 import { UpdateTransactionsService } from '../../application/services/update/update.service';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { API_PATH } from '../transactions-constants.controller';
+import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
+import { TransactionResponseDto } from '../../repository/dto/transaction-response.dto';
 
 @Controller(API_PATH)
 export class UpdateTransactionsController {
@@ -9,11 +11,16 @@ export class UpdateTransactionsController {
     private readonly updateTransactionsService: UpdateTransactionsService,
   ) {}
 
-  @Put(':id')
+  @Put(':transactionId')
   update(
-    @Param('id') id: string,
+    @Param('transactionId', ParseUUIDPipe) transactionId: string,
+    @ExtractUserId() userId: string,
     @Body() updateTransactionDto: UpdateTransactionDto,
-  ) {
-    return this.updateTransactionsService.update(id, updateTransactionDto);
+  ): Promise<TransactionResponseDto> {
+    return this.updateTransactionsService.update(
+      transactionId,
+      userId,
+      updateTransactionDto,
+    );
   }
 }
