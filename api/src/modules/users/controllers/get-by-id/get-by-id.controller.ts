@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { UsersApiPath } from '../users-api.constants';
 import { ExtractUserId } from 'src/shared/decorators';
 import { GetUserResponseDto } from './dto';
-import { GetUserByIdService } from '../../services';
+import { GetUserByIdService } from '../../application/services';
 
 @Controller(UsersApiPath)
 export class GetUserByIdController {

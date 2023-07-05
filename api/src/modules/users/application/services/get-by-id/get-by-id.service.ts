@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { GetUserResponseDto } from '../../controllers/get-by-id/dto';
-import { UserRepository } from '../../repository';
+import { GetUserResponseDto } from 'src/modules/users/controllers/get-by-id/dto';
+import { UserRepository } from 'src/modules/users/repository';
 
 @Injectable()
 export class GetUserByIdService {

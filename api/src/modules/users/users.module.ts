@@ -3,12 +3,12 @@ import {
   BcryptAdapter,
   UserRepositoryPrismaAdapter,
 } from 'src/shared/adapters';
-import {
-  CreateUserService,
-  GetUserByEmailService,
-  GetUserByIdService,
-} from './services';
 import { GetUserByIdController } from './controllers';
+import {
+  GetUserByIdService,
+  GetUserByEmailService,
+  CreateUserService,
+} from './application/services';
 
 @Module({
   controllers: [GetUserByIdController],

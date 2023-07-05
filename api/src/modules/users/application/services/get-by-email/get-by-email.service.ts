@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserRepository } from '../../repository';
 import { UserResponseDto } from '../create/dto/user-response.dto';
+import { UserRepository } from 'src/modules/users/repository';
 
 @Injectable()
 export class GetUserByEmailService {

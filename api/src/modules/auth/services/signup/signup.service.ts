@@ -1,5 +1,4 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
-import { UserRepository } from 'src/modules/users/repository/user-repository.interface';
 import { Hasher } from 'src/shared/adapters/cryptography/interfaces/hasher.interface';
 import { Encrypt } from 'src/shared/adapters/cryptography/jwt/interfaces/encrypt.interface';
 import { EncryptedPayloadDto } from 'src/shared/adapters/cryptography/jwt/dto/encrypted-payload.dto';
@@ -8,7 +7,7 @@ import { SignupDto } from '../../dto/signup/signup.dto';
 import {
   CreateUserService,
   GetUserByEmailService,
-} from 'src/modules/users/services';
+} from 'src/modules/users/application/services';
 
 @Injectable()
 export class SignupService {

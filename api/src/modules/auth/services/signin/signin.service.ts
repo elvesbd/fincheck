@@ -4,7 +4,7 @@ import { Encrypt } from 'src/shared/adapters/cryptography/jwt/interfaces/encrypt
 import { EncryptedPayloadDto } from 'src/shared/adapters/cryptography/jwt/dto/encrypted-payload.dto';
 import { SigninResponseDto } from '../../dto/signin/signin-response.dto';
 import { SigninDto } from '../../dto/signin/signin.dto';
-import { GetUserByEmailService } from 'src/modules/users/services';
+import { GetUserByEmailService } from 'src/modules/users/application/services';
 
 @Injectable()
 export class SigninService {
