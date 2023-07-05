@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserRepository } from '../../repository/user-repository.interface';
-import { GetByIdResponseDto } from '../../controllers/get-by-id/dto/get-by-id-response.dto';
+import { GetUserResponseDto } from '../../controllers/get-by-id/dto';
+import { UserRepository } from '../../repository';
 
 @Injectable()
 export class GetUserByIdService {
@@ -9,12 +9,12 @@ export class GetUserByIdService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  async execute(id: string): Promise<GetByIdResponseDto> {
-    const user = await this.userRepository.findById(id);
+  async execute(id: string): Promise<GetUserResponseDto> {
+    const { name, email } = await this.userRepository.getById(id);
 
     return {
-      name: user.name,
-      email: user.email,
+      name,
+      email,
     };
   }
 }

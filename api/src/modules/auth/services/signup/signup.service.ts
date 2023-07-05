@@ -5,22 +5,26 @@ import { Encrypt } from 'src/shared/adapters/cryptography/jwt/interfaces/encrypt
 import { EncryptedPayloadDto } from 'src/shared/adapters/cryptography/jwt/dto/encrypted-payload.dto';
 import { SignupResponseDto } from '../../dto/signup/signup-response.dto';
 import { SignupDto } from '../../dto/signup/signup.dto';
+import {
+  CreateUserService,
+  GetUserByEmailService,
+} from 'src/modules/users/services';
 
 @Injectable()
 export class SignupService {
   constructor(
-    @Inject('USER_REPOSITORY')
-    private readonly userRepository: UserRepository,
     @Inject('HASHER')
     private readonly hasher: Hasher,
     @Inject('ENCRYPT')
     private readonly encrypt: Encrypt,
+    private readonly createUserService: CreateUserService,
+    private readonly getUserByEmailService: GetUserByEmailService,
   ) {}
 
   async execute(signupDto: SignupDto): Promise<SignupResponseDto> {
     const { email, password } = signupDto;
 
-    const user = await this.userRepository.findByEmail(email);
+    const user = await this.getUserByEmailService.execute(email);
     if (user?.email) {
       throw new ConflictException('This email is already in use');
     }
@@ -30,7 +34,7 @@ export class SignupService {
       ...signupDto,
       password: hashedPassword,
     };
-    const { id } = await this.userRepository.create(data);
+    const { id } = await this.createUserService.execute(data);
     const accessToken = await this.generateAccessToken(id);
 
     return { accessToken };

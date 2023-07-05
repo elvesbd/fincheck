@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../service/prisma.service';
-import { Prisma, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { UserRepository } from 'src/modules/users/repository/user-repository.interface';
 import { SignupDto } from 'src/modules/auth/dto/signup/signup.dto';
 
@@ -8,13 +8,13 @@ import { SignupDto } from 'src/modules/auth/dto/signup/signup.dto';
 export class UserRepositoryPrismaAdapter implements UserRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findById(id: string): Promise<Partial<User>> {
+  async getById(id: string): Promise<User> {
     return await this.prismaService.user.findUnique({
       where: { id },
     });
   }
 
-  async findByEmail(email: string): Promise<Partial<User>> {
+  async getByEmail(email: string): Promise<User> {
     return await this.prismaService.user.findUnique({
       where: { email },
     });
