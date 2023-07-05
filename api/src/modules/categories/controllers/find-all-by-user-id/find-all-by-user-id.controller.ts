@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import { API_PATH } from '../constants.controller';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { FindAllCategoriesByUserIdService } from '../../application/services/find-all-by-user-id/find-all-by-user-id.service';
+import { CategoriesApiPath } from '../categories-api.constants';
 
-@Controller(API_PATH)
+@Controller(CategoriesApiPath)
 export class FindAllCategoriesByUserIdController {
   constructor(
     private readonly findAllCategoriesByUserIdService: FindAllCategoriesByUserIdService,

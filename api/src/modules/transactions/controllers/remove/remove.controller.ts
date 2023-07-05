@@ -7,10 +7,10 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { RemoveTransactionsService } from '../../application/services/remove/remove.service';
-import { API_PATH } from '../transactions-constants.controller';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
+import { TransactionsApiPath } from '../transactions-api.constants';
 
-@Controller(API_PATH)
+@Controller(TransactionsApiPath)
 export class RemoveTransactionsController {
   constructor(
     private readonly removeTransactionsService: RemoveTransactionsService,

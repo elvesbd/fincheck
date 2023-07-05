@@ -8,8 +8,9 @@ import {
 } from '@nestjs/common';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { RemoveBankAccountsService } from '../../application/services/remove/remove.service';
+import { BankAccountsApiPath } from '../bank-accounts-api.constants';
 
-@Controller('bank-accounts')
+@Controller(BankAccountsApiPath)
 export class RemoveBankAccountsController {
   constructor(
     private readonly removeBankAccountsService: RemoveBankAccountsService,

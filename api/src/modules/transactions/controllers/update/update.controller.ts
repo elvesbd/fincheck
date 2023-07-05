@@ -1,11 +1,11 @@
 import { Controller, Body, Param, Put, ParseUUIDPipe } from '@nestjs/common';
 import { UpdateTransactionsService } from '../../application/services/update/update.service';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
-import { API_PATH } from '../transactions-constants.controller';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { TransactionResponseDto } from '../../repository/dto/transaction-response.dto';
+import { TransactionsApiPath } from '../transactions-api.constants';
 
-@Controller(API_PATH)
+@Controller(TransactionsApiPath)
 export class UpdateTransactionsController {
   constructor(
     private readonly updateTransactionsService: UpdateTransactionsService,

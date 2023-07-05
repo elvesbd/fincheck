@@ -2,8 +2,9 @@ import { Controller, Body, Put, Param, ParseUUIDPipe } from '@nestjs/common';
 import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { UpdateBankAccountsService } from '../../application/services/update/update.service';
+import { BankAccountsApiPath } from '../bank-accounts-api.constants';
 
-@Controller('bank-accounts')
+@Controller(BankAccountsApiPath)
 export class UpdateBankAccountsController {
   constructor(
     private readonly updateBankAccountsService: UpdateBankAccountsService,

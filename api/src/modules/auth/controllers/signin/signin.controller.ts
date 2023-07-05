@@ -1,11 +1,11 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { SigninService } from '../../services/signin/signin.service';
-import { API_PATH } from '../constants.controller';
 import { SigninDto } from '../../dto/signin/signin.dto';
 import { SigninResponseDto } from '../../dto/signin/signin-response.dto';
 import { IsPublic } from 'src/shared/decorators/is-public.decorator';
+import { AuthApiPath } from '../auth-api.constants';
 
-@Controller(API_PATH)
+@Controller(AuthApiPath)
 export class SigninController {
   constructor(private readonly signinService: SigninService) {}
 

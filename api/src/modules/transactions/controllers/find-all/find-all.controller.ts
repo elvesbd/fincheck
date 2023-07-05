@@ -1,20 +1,13 @@
-import {
-  Controller,
-  Get,
-  ParseEnumPipe,
-  ParseIntPipe,
-  ParseUUIDPipe,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import { FindAllTransactionsService } from '../../application/services/find-all/find-all.service';
-import { API_PATH } from '../transactions-constants.controller';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { FiltersDto } from './dto/filters.dto';
 import { OptionalParseUUIDPipe } from 'src/shared/pipes';
 import { TransactionType } from '../../enum';
 import { OptionalParseEnumPipe } from 'src/shared/pipes/optional-parser-enum.pipe';
+import { TransactionsApiPath } from '../transactions-api.constants';
 
-@Controller(API_PATH)
+@Controller(TransactionsApiPath)
 export class FindAllTransactionsController {
   constructor(
     private readonly findAllTransactionsService: FindAllTransactionsService,
