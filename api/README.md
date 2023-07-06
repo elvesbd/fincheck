@@ -1,73 +1,153 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Nome do projeto
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![GitHub repo size](https://img.shields.io/github/repo-size/elvesbd/fincheck?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/elvesbd/fincheck?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/elvesbd/fincheck?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues-raw/elvesbd/fincheck?style=for-the-badge)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/elvesbd/fincheck?style=for-the-badge)
 
-## Description
+<img src="https://i.imgur.com/He7RgjD.png" alt="exemplo imagem">
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+> A API de Controle de Finanças fincheck foi desenvolvida internamente para os alunos do curso [JStack](https://jstack.com.br) ministrado por [Mateus Silva](https://github.com/maateusilva) é uma plataforma abrangente projetada para ajudar os usuários a gerenciar suas finanças de forma eficiente. Com esta API, você pode se cadastrar como usuário, cadastrar contas financeiras e criar transações de gastos e depósitos. O processo de cadastro na API é simples e seguro. Após se registrar, você receberá um token de acesso exclusivo, que será necessário para autenticar suas solicitações e obter acesso às funcionalidades disponíveis. No curso foi feito a criação da API, mas procurei andar a milha extra e aplicar alguns conhecimento que tenho adquirido no mercado como [ports and adapters](https://www.youtube.com/watch?v=7SaA3HCOc4c), princípios do [SOLID](https://www.youtube.com/watch?v=mkx0CdWiPRA) e aplicação de tests unitários com [jest](https://jestjs.io/).
 
-## Installation
+### Ajustes e melhorias
 
-```bash
-$ yarn install
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+
+- [ ] Refatorar auth module
+- [ ] Refatorar bank accounts module
+- [ ] Refatorar transactions module
+- [ ] Adicionar teste unitários
+
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+<!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
+
+- Você precisa ter o [node](https://nodejs.org/en) instalado
+- [docker](https://docs.docker.com/engine/install) para rodar o banco de dados, na aplicação utilizamos Postgres.
+
+## 🚀 Instalando fincheck
+
+Para instalar o fincheck, siga estas etapas:
+
+Clone o projeto:
+
+```
+git clone https://github.com/elvesbd/fincheck.git
 ```
 
-## Running the app
+Acesse o diretório da api:
 
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+```
+cd fincheck/api
 ```
 
-## Test
+Instale as dependências:
 
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+```
+yarn install
 ```
 
-## Support
+Rodando postgres com docker:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+docker run --name <nome_container> -e POSTGRES_USER=<sua senha> -e POSTGRES_PASSWORD=<seu password> -p 5432:5432 -d postgres
+```
 
-## Stay in touch
+Verifique se o container estar rodando:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+docker ps
+```
 
-## License
+Acessando o container para criar a base de dados:
 
-Nest is [MIT licensed](LICENSE).
+```
+docker exec -it <nome_container> bash
+```
+
+Acessando o banco de dados postgres:
+
+```
+psql -U <sua senha>
+```
+
+Criando a base de dados:
+
+```
+CREATE DATABASE <defina o nome da sua base aqui>;
+execute o comando \l para verificar se sua base foi criada
+```
+
+Altere no .env a variável de ambiente de acesso ao banco:
+
+```
+DATABASE_URL="postgresql://<sua usuario>:<sua senha>@localhost:5432/<nome da base de dados>?schema=public"
+```
+
+Execute as migrations:
+
+```
+yarn prisma migrate dev
+```
+
+Defina um valor para sua jwt secret:
+
+```
+JWT_SECRET=valor
+```
+
+## ☕ Usando fincheck
+
+Para usar fincheck, execute:
+
+```
+yarn start:dev
+```
+
+Para acessar a api do fincheck:
+
+```
+http://localhost:<porta>/api/v1
+```
+
+## 📫 Contribuindo para fincheck
+
+<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
+
+Para contribuir com fincheck, siga estas etapas:
+
+1. Bifurque este repositório.
+2. Crie um branch: `git checkout -b <nome_branch>`.
+3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+4. Envie para o branch original: `git push origin <fincheck> / <local>`
+5. Crie a solicitação de pull.
+
+Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## 🤝 Colaboradores
+
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/elvesbd.png" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+        <sub>
+          <b>Elves Brito</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+## 📝 Licença
+
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+
+[⬆ Voltar ao topo](#nome-do-projeto)<br>
