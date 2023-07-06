@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UserRepository } from 'src/modules/users/repository';
+import { UserRegistrationException } from 'src/modules/users/exceptions';
 
 @Injectable()
 export class CreateUserService {
@@ -11,6 +12,8 @@ export class CreateUserService {
   ) {}
 
   async execute(createUserDto: CreateUserDto): Promise<UserResponseDto> {
-    return await this.userRepository.create(createUserDto);
+    const user = await this.userRepository.create(createUserDto);
+    if (!user) throw new UserRegistrationException();
+    return user;
   }
 }
