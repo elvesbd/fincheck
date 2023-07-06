@@ -5,8 +5,13 @@ import { FiltersDto } from './dto/filters.dto';
 import { OptionalParseUUIDPipe } from 'src/shared/pipes';
 import { TransactionType } from '../../enum';
 import { OptionalParseEnumPipe } from 'src/shared/pipes/optional-parser-enum.pipe';
-import { TransactionsApiPath } from '../transactions-api.constants';
+import {
+  TransactionsApiPath,
+  TransactionsApiTag,
+} from '../transactions-api.constants';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
 export class FindAllTransactionsController {
   constructor(

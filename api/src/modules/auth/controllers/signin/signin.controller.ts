@@ -3,8 +3,10 @@ import { SigninService } from '../../services/signin/signin.service';
 import { SigninDto } from '../../dto/signin/signin.dto';
 import { SigninResponseDto } from '../../dto/signin/signin-response.dto';
 import { IsPublic } from 'src/shared/decorators/is-public.decorator';
-import { AuthApiPath } from '../auth-api.constants';
+import { AuthApiPath, AuthApiTag } from '../auth-api.constants';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(AuthApiTag)
 @Controller(AuthApiPath)
 export class SigninController {
   constructor(private readonly signinService: SigninService) {}

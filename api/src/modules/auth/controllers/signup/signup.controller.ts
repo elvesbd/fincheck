@@ -3,8 +3,10 @@ import { SignupService } from '../../services/signup/signup.service';
 import { SignupResponseDto } from '../../dto/signup/signup-response.dto';
 import { SignupDto } from '../../dto/signup/signup.dto';
 import { IsPublic } from 'src/shared/decorators/is-public.decorator';
-import { AuthApiPath } from '../auth-api.constants';
+import { AuthApiPath, AuthApiTag } from '../auth-api.constants';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(AuthApiTag)
 @Controller(AuthApiPath)
 export class SignupController {
   constructor(private readonly signupService: SignupService) {}

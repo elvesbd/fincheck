@@ -2,8 +2,13 @@ import { Controller, Body, Put, Param, ParseUUIDPipe } from '@nestjs/common';
 import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { UpdateBankAccountsService } from '../../application/services/update/update.service';
-import { BankAccountsApiPath } from '../bank-accounts-api.constants';
+import {
+  BankAccountsApiPath,
+  BankAccountsApiTag,
+} from '../bank-accounts-api.constants';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(BankAccountsApiTag)
 @Controller(BankAccountsApiPath)
 export class UpdateBankAccountsController {
   constructor(

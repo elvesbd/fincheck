@@ -2,8 +2,13 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { CreateTransactionsService } from '../../application/services';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
-import { TransactionsApiPath } from '../transactions-api.constants';
+import {
+  TransactionsApiPath,
+  TransactionsApiTag,
+} from '../transactions-api.constants';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
 export class CreateTransactionsController {
   constructor(

@@ -2,8 +2,13 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { CreateBankAccountDto } from './dto/create-bank-account.dto';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { CreateBankAccountsService } from '../../application/services/create/create.service';
-import { BankAccountsApiPath } from '../bank-accounts-api.constants';
+import {
+  BankAccountsApiPath,
+  BankAccountsApiTag,
+} from '../bank-accounts-api.constants';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(BankAccountsApiTag)
 @Controller(BankAccountsApiPath)
 export class CreateBankAccountsController {
   constructor(

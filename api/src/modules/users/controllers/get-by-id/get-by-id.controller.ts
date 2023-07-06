@@ -1,9 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import { UsersApiPath } from '../users-api.constants';
+import { UsersApiPath, UsersApiTag } from '../users-api.constants';
 import { ExtractUserId } from 'src/shared/decorators';
 import { GetUserResponseDto } from './dto';
 import { GetUserByIdService } from '../../application/services';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(UsersApiTag)
 @Controller(UsersApiPath)
 export class GetUserByIdController {
   constructor(private readonly getUserByIdService: GetUserByIdService) {}

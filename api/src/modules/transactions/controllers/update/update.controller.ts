@@ -3,8 +3,13 @@ import { UpdateTransactionsService } from '../../application/services/update/upd
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { TransactionResponseDto } from '../../repository/dto/transaction-response.dto';
-import { TransactionsApiPath } from '../transactions-api.constants';
+import {
+  TransactionsApiPath,
+  TransactionsApiTag,
+} from '../transactions-api.constants';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
 export class UpdateTransactionsController {
   constructor(
