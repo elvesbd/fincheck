@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
-import { SigninController } from './controllers/signin/signin.controller';
-import { SigninService } from './services/signin/signin.service';
-import { BcryptAdapter } from 'src/shared/adapters/cryptography/bcrypt/bcrypt-adapter.service';
-import { JwtAdapter } from 'src/shared/adapters/cryptography/jwt/jwt-adapter.service';
-import { SignupController } from './controllers/signup/signup.controller';
-import { SignupService } from './services/signup/signup.service';
 import { UsersModule } from '../users/users.module';
+import { SigninService, SignupService } from './application/services';
+import { SigninController, SignupController } from './controllers';
+import { BcryptAdapter } from 'src/shared/adapters/cryptography/bcrypt';
+import { JwtAdapter } from 'src/shared/adapters/cryptography/jwt';
 
 @Module({
   imports: [UsersModule],

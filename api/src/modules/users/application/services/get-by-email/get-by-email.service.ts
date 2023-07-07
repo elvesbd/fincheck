@@ -10,11 +10,6 @@ export class GetUserByEmailService {
   ) {}
 
   async execute(email: string): Promise<UserResponseDto> {
-    try {
-      return await this.userRepository.getByEmail(email);
-    } catch (error) {
-      console.log('GetUserByEmailService');
-      console.log(error);
-    }
+    return await this.userRepository.getByEmail(email);
   }
 }

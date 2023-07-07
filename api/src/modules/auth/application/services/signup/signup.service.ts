@@ -1,13 +1,14 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
-import { Hasher } from 'src/shared/adapters/cryptography/interfaces/hasher.interface';
-import { Encrypt } from 'src/shared/adapters/cryptography/jwt/interfaces/encrypt.interface';
-import { EncryptedPayloadDto } from 'src/shared/adapters/cryptography/jwt/dto/encrypted-payload.dto';
-import { SignupResponseDto } from '../../dto/signup/signup-response.dto';
-import { SignupDto } from '../../dto/signup/signup.dto';
+import { SignupDto, SignupResponseDto } from 'src/modules/auth/dto/signup';
+import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
 import {
   CreateUserService,
   GetUserByEmailService,
 } from 'src/modules/users/application/services';
+import {
+  Encrypt,
+  EncryptedPayloadDto,
+} from 'src/shared/adapters/cryptography/jwt';
 
 @Injectable()
 export class SignupService {
