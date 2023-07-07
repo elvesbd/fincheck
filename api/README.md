@@ -16,7 +16,7 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Refatorar auth module
+- [x] Refatorar auth module
 - [ ] Refatorar bank accounts module
 - [ ] Refatorar transactions module
 - [ ] Adicionar teste unitários
