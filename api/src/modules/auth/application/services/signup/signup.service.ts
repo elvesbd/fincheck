@@ -25,17 +25,17 @@ export class SignupService {
     const { email, password } = signupDto;
 
     const user = await this.getUserByEmailService.execute(email);
-    if (user?.email) {
+    if (user) {
       throw new ConflictException('This email is already in use');
     }
 
     const hashedPassword = await this.generatePasswordHash(password);
-    const data = {
+    const userData = {
       ...signupDto,
       password: hashedPassword,
     };
-    const { id } = await this.createUserService.execute(data);
-    const accessToken = await this.generateAccessToken(id);
+    const { id } = await this.createUserService.execute(userData);
+    const accessToken = await this.generateToken(id);
 
     return { accessToken };
   }
@@ -44,7 +44,7 @@ export class SignupService {
     return this.hasher.hash(password, 10);
   }
 
-  private async generateAccessToken(userId: string): Promise<string> {
+  private async generateToken(userId: string): Promise<string> {
     const payload: EncryptedPayloadDto = {
       sub: userId,
     };
