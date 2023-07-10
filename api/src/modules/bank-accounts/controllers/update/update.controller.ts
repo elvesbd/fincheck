@@ -6,8 +6,15 @@ import {
   BankAccountsApiPath,
   BankAccountsApiTag,
 } from '../bank-accounts-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { BankAccountResponseDto } from '../../dto/bank-account-response.dto';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(BankAccountsApiTag)
 @Controller(BankAccountsApiPath)
 export class UpdateBankAccountsController {
@@ -15,12 +22,14 @@ export class UpdateBankAccountsController {
     private readonly updateBankAccountsService: UpdateBankAccountsService,
   ) {}
 
+  @ApiOperation({ summary: 'Update a bank account' })
+  @ApiOkResponse({ type: BankAccountResponseDto })
   @Put(':id')
   Update(
     @Param('id', ParseUUIDPipe) id: string,
     @ExtractUserId() userId: string,
     @Body() updateBankAccountDto: UpdateBankAccountDto,
-  ) {
+  ): Promise<BankAccountResponseDto> {
     return this.updateBankAccountsService.execute(
       id,
       userId,

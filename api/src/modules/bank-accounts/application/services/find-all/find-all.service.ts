@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { BankAccountWithBalanceResponseDto } from 'src/modules/bank-accounts/controllers/find-all/dto/bank-account-with-balance-response.dto';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
+import { BankAccountDto } from 'src/modules/bank-accounts/repository/dto/bank-account.dto';
 
 @Injectable()
 export class FindAllBankAccountsService {
@@ -8,27 +10,34 @@ export class FindAllBankAccountsService {
     private readonly bankAccountsRepository: BankAccountsRepository,
   ) {}
 
-  async execute(id: string) {
+  async execute(id: string): Promise<BankAccountWithBalanceResponseDto[]> {
     const bankAccounts =
       await this.bankAccountsRepository.findTransactionsByUserIdAndAccountId(
         id,
       );
 
-    return bankAccounts.map(({ transactions, ...bankAccount }) => {
-      const totalTransactions = transactions.reduce(
-        (acc, transaction) =>
-          acc +
-          (transaction.type === 'INCOME'
-            ? transaction.value
-            : -transaction.value),
-        0,
-      );
+    return bankAccounts.map((bankAccount) =>
+      this.calculateCurrentBalance(bankAccount),
+    );
+  }
 
-      const currentBalance = bankAccount.initialBalance + totalTransactions;
-      return {
-        ...bankAccount,
-        currentBalance,
-      };
-    });
+  private calculateCurrentBalance(
+    bankAccount: BankAccountDto,
+  ): BankAccountWithBalanceResponseDto {
+    const totalTransactions = bankAccount.transactions.reduce(
+      (acc, transaction) =>
+        acc +
+        (transaction.type === 'INCOME'
+          ? transaction.value
+          : -transaction.value),
+      0,
+    );
+
+    const currentBalance = bankAccount.initialBalance + totalTransactions;
+
+    return {
+      ...bankAccount,
+      currentBalance,
+    };
   }
 }

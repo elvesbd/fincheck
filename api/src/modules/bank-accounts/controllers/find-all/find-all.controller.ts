@@ -5,8 +5,15 @@ import {
   BankAccountsApiPath,
   BankAccountsApiTag,
 } from '../bank-accounts-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { BankAccountWithBalanceResponseDto } from './dto/bank-account-with-balance-response.dto';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(BankAccountsApiTag)
 @Controller(BankAccountsApiPath)
 export class FinAllBankAccountsController {
@@ -14,8 +21,12 @@ export class FinAllBankAccountsController {
     private readonly finAllBankAccountsService: FindAllBankAccountsService,
   ) {}
 
+  @ApiOperation({ summary: 'Find all bank accounts' })
+  @ApiOkResponse({ type: BankAccountWithBalanceResponseDto })
   @Get()
-  findAll(@ExtractUserId() id: string) {
+  findAll(
+    @ExtractUserId() id: string,
+  ): Promise<BankAccountWithBalanceResponseDto[]> {
     return this.finAllBankAccountsService.execute(id);
   }
 }

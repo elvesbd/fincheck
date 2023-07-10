@@ -12,8 +12,16 @@ import {
   BankAccountsApiPath,
   BankAccountsApiTag,
 } from '../bank-accounts-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
+  ApiNotFoundResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(BankAccountsApiTag)
 @Controller(BankAccountsApiPath)
 export class RemoveBankAccountsController {
@@ -21,6 +29,10 @@ export class RemoveBankAccountsController {
     private readonly removeBankAccountsService: RemoveBankAccountsService,
   ) {}
 
+  @ApiOperation({ summary: 'Remove a bank account' })
+  @ApiNoContentResponse({
+    description: 'The bank account has been successfully removed',
+  })
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(

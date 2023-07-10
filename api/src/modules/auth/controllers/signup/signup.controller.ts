@@ -3,7 +3,12 @@ import { SignupResponseDto } from '../../dto/signup/signup-response.dto';
 import { SignupDto } from '../../dto/signup/signup.dto';
 import { IsPublic } from 'src/shared/decorators/is-public.decorator';
 import { AuthApiPath, AuthApiTag } from '../auth-api.constants';
-import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { SignupService } from '../../application/services';
 
 @ApiTags(AuthApiTag)
@@ -11,6 +16,7 @@ import { SignupService } from '../../application/services';
 export class SignupController {
   constructor(private readonly signupService: SignupService) {}
 
+  @ApiOperation({ summary: 'Register in the application' })
   @ApiCreatedResponse({ type: SignupResponseDto })
   @ApiBody({ type: SignupDto })
   @IsPublic()

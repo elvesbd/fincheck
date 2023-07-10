@@ -1,6 +1,6 @@
 import { CreateBankAccountDto } from '../controllers/create/dto/create-bank-account.dto';
 import { UpdateBankAccountDto } from '../controllers/update/dto/update-bank-account.dto';
-import { BankAccountResponseDto } from './dto/bank-account-response.dto';
+import { BankAccountResponseDto } from '../dto/bank-account-response.dto';
 
 export interface BankAccountsRepository {
   create(

@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UpdateBankAccountDto } from 'src/modules/bank-accounts/controllers/update/dto/update-bank-account.dto';
 import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain/validate-bank-account-owner-ship.service';
+import { BankAccountResponseDto } from 'src/modules/bank-accounts/dto/bank-account-response.dto';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
 
 @Injectable()
@@ -15,7 +16,7 @@ export class UpdateBankAccountsService {
     id: string,
     userId: string,
     updateBankAccountDto: UpdateBankAccountDto,
-  ) {
+  ): Promise<BankAccountResponseDto> {
     await this.validateBankAccountOwnerShipService.execute(id, userId);
     return await this.bankAccountsRepository.update(id, updateBankAccountDto);
   }
