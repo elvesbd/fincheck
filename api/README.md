@@ -18,7 +18,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 - [x] Refatorar auth module
 - [x] Refatorar bank accounts module
-- [ ] Refatorar transactions module
+- [x] Refatorar transactions module
 - [ ] Adicionar teste unitários
 
 ## 💻 Pré-requisitos
