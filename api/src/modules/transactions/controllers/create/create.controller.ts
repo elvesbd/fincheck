@@ -7,6 +7,7 @@ import {
   TransactionsApiTag,
 } from '../transactions-api.constants';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOperation,
@@ -14,6 +15,7 @@ import {
 } from '@nestjs/swagger';
 import { TransactionResponseDto } from '../../dto';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
 export class CreateTransactionsController {

@@ -9,8 +9,16 @@ import {
   TransactionsApiPath,
   TransactionsApiTag,
 } from '../transactions-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
+import { TransactionResponseDto } from '../../dto';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
 export class FindAllTransactionsController {
@@ -18,6 +26,14 @@ export class FindAllTransactionsController {
     private readonly findAllTransactionsService: FindAllTransactionsService,
   ) {}
 
+  @ApiOperation({ summary: 'find all all transactions by user id' })
+  @ApiOkResponse({ type: [TransactionResponseDto] })
+  @ApiQuery({ name: 'bankAccountId', required: false })
+  @ApiQuery({
+    name: 'type',
+    required: false,
+    enum: TransactionType,
+  })
   @Get()
   findAll(
     @ExtractUserId() userId: string,
@@ -26,7 +42,7 @@ export class FindAllTransactionsController {
     @Query('bankAccountId', OptionalParseUUIDPipe) bankAccountId: string,
     @Query('type', new OptionalParseEnumPipe(TransactionType))
     type: TransactionType,
-  ) {
+  ): Promise<TransactionResponseDto[]> {
     const filters: FiltersDto = { month, year, bankAccountId, type };
     return this.findAllTransactionsService.findAll(userId, filters);
   }
