@@ -6,7 +6,13 @@ import {
   TransactionsApiPath,
   TransactionsApiTag,
 } from '../transactions-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { TransactionResponseDto } from '../../dto';
 
 @ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
@@ -15,11 +21,14 @@ export class CreateTransactionsController {
     private readonly createTransactionsService: CreateTransactionsService,
   ) {}
 
+  @ApiOperation({ summary: 'Create an transaction' })
+  @ApiCreatedResponse({ type: TransactionResponseDto })
+  @ApiBody({ type: CreateTransactionDto })
   @Post()
   create(
     @ExtractUserId() userId: string,
     @Body() createTransactionDto: CreateTransactionDto,
-  ) {
+  ): Promise<TransactionResponseDto> {
     return this.createTransactionsService.create(userId, createTransactionDto);
   }
 }

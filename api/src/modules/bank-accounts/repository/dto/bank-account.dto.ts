@@ -1,4 +1,4 @@
-import { TransactionResponseDto } from 'src/modules/transactions/repository/dto/transaction-response.dto';
+import { TransactionResponseDto } from 'src/modules/transactions/dto';
 
 export class BankAccountDto {
   id: string;

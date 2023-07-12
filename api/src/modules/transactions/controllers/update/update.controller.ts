@@ -2,12 +2,12 @@ import { Controller, Body, Param, Put, ParseUUIDPipe } from '@nestjs/common';
 import { UpdateTransactionsService } from '../../application/services/update/update.service';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
-import { TransactionResponseDto } from '../../repository/dto/transaction-response.dto';
 import {
   TransactionsApiPath,
   TransactionsApiTag,
 } from '../transactions-api.constants';
 import { ApiTags } from '@nestjs/swagger';
+import { TransactionResponseDto } from '../../dto';
 
 @ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)

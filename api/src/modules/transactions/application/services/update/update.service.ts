@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UpdateTransactionDto } from 'src/modules/transactions/controllers';
 import { ValidateEntitiesOwnerShipService } from 'src/modules/transactions/domain/validate-entites-ownership.service';
+import { TransactionResponseDto } from 'src/modules/transactions/dto';
 import { TransactionsRepository } from 'src/modules/transactions/repository';
-import { TransactionResponseDto } from 'src/modules/transactions/repository/dto/transaction-response.dto';
 
 @Injectable()
 export class UpdateTransactionsService {
