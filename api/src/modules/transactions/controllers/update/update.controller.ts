@@ -6,9 +6,15 @@ import {
   TransactionsApiPath,
   TransactionsApiTag,
 } from '../transactions-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { TransactionResponseDto } from '../../dto';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
 export class UpdateTransactionsController {
@@ -16,6 +22,10 @@ export class UpdateTransactionsController {
     private readonly updateTransactionsService: UpdateTransactionsService,
   ) {}
 
+  @ApiOperation({ summary: 'update an transaction' })
+  @ApiOkResponse({
+    type: TransactionResponseDto,
+  })
   @Put(':transactionId')
   update(
     @Param('transactionId', ParseUUIDPipe) transactionId: string,

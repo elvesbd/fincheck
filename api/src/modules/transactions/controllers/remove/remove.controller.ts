@@ -12,8 +12,14 @@ import {
   TransactionsApiPath,
   TransactionsApiTag,
 } from '../transactions-api.constants';
-import { ApiNoContentResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiNoContentResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
 export class RemoveTransactionsController {
