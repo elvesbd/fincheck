@@ -5,8 +5,15 @@ import {
   CategoriesApiPath,
   CategoriesApiTag,
 } from '../categories-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { CategoryResponseDto } from './dto/category-response.dto';
 
+@ApiBearerAuth('JWT-auth')
 @ApiTags(CategoriesApiTag)
 @Controller(CategoriesApiPath)
 export class FindAllCategoriesByUserIdController {
@@ -14,8 +21,10 @@ export class FindAllCategoriesByUserIdController {
     private readonly findAllCategoriesByUserIdService: FindAllCategoriesByUserIdService,
   ) {}
 
+  @ApiOperation({ summary: 'find all categories' })
+  @ApiOkResponse({ type: [CategoryResponseDto] })
   @Get()
-  find(@ExtractUserId() id: string) {
+  find(@ExtractUserId() id: string): Promise<CategoryResponseDto[]> {
     return this.findAllCategoriesByUserIdService.execute(id);
   }
 }

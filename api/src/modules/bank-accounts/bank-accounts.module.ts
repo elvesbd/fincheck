@@ -3,12 +3,12 @@ import { CreateBankAccountsController } from './controllers/create/create.contro
 import { FinAllBankAccountsController } from './controllers/find-all/find-all.controller';
 import { UpdateBankAccountsController } from './controllers/update/update.controller';
 import { RemoveBankAccountsController } from './controllers/remove/remove.controller';
-import { BankAccountsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/bank-accounts/bank-accounts-repository-prisma-adapter.service';
-import { ValidateBankAccountOwnerShipService } from './domain/validate-bank-account-owner-ship.service';
 import { CreateBankAccountsService } from './application/services/create/create.service';
 import { FindAllBankAccountsService } from './application/services/find-all/find-all.service';
 import { RemoveBankAccountsService } from './application/services/remove/remove.service';
 import { UpdateBankAccountsService } from './application/services/update/update.service';
+import { ValidateBankAccountOwnerShipService } from './domain';
+import { BankAccountsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma';
 
 const bankAccountsControllers = [
   CreateBankAccountsController,

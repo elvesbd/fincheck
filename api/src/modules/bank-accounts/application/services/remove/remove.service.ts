@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain/validate-bank-account-owner-ship.service';
+import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
 
 @Injectable()

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain/validate-bank-account-owner-ship.service';
-import { ValidateCategoryOwnerShipService } from 'src/modules/categories/domain/validate-category-owner-ship.service';
 import { ValidateEntitiesOwnerShipDto } from './dto/validate-entities-ownership.dto';
 import { ValidateTransactionsOwnershipService } from './validate-transactions-ownership.service';
+import { ValidateCategoryOwnerShipService } from 'src/modules/categories/domain';
+import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain';
 
 @Injectable()
 export class ValidateEntitiesOwnerShipService {

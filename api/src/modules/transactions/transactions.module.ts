@@ -11,13 +11,15 @@ import {
   UpdateTransactionsController,
   RemoveTransactionsController,
 } from './controllers';
-import { TransactionsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories/transactions/transactions-repository-prisma-adapter.service';
-import { ValidateBankAccountOwnerShipService } from '../bank-accounts/domain/validate-bank-account-owner-ship.service';
-import { ValidateCategoryOwnerShipService } from '../categories/domain/validate-category-owner-ship.service';
 import { CategoriesModule } from '../categories/categories.module';
 import { BankAccountsModule } from '../bank-accounts/bank-accounts.module';
-import { ValidateEntitiesOwnerShipService } from './domain/validate-entites-ownership.service';
-import { ValidateTransactionsOwnershipService } from './domain/validate-transactions-ownership.service';
+import {
+  ValidateTransactionsOwnershipService,
+  ValidateEntitiesOwnerShipService,
+} from './domain';
+import { ValidateCategoryOwnerShipService } from '../categories/domain';
+import { ValidateBankAccountOwnerShipService } from '../bank-accounts/domain';
+import { TransactionsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma';
 
 const controllers = [
   CreateTransactionsController,

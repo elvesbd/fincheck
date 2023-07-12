@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateTransactionDto } from 'src/modules/transactions/controllers';
-import { ValidateEntitiesOwnerShipService } from 'src/modules/transactions/domain/validate-entites-ownership.service';
+import { ValidateEntitiesOwnerShipService } from 'src/modules/transactions/domain';
 import { TransactionResponseDto } from 'src/modules/transactions/dto';
 import { TransactionsRepository } from 'src/modules/transactions/repository';
 

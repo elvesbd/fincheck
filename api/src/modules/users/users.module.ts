@@ -6,7 +6,7 @@ import {
   CreateUserService,
 } from './application/services';
 import { BcryptAdapter } from 'src/shared/adapters/cryptography/bcrypt';
-import { UserRepositoryPrismaAdapter } from 'src/shared/adapters/prisma/repositories';
+import { UserRepositoryPrismaAdapter } from 'src/shared/adapters/prisma';
 
 @Module({
   controllers: [GetUserByIdController],

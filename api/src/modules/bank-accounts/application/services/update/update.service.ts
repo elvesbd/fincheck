@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UpdateBankAccountDto } from 'src/modules/bank-accounts/controllers/update/dto/update-bank-account.dto';
-import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain/validate-bank-account-owner-ship.service';
+import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain';
 import { BankAccountResponseDto } from 'src/modules/bank-accounts/dto/bank-account-response.dto';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
 

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ValidateEntitiesOwnerShipService } from 'src/modules/transactions/domain/validate-entites-ownership.service';
+import { ValidateEntitiesOwnerShipService } from 'src/modules/transactions/domain';
 import { TransactionsRepository } from 'src/modules/transactions/repository';
 
 @Injectable()
