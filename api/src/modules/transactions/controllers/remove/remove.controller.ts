@@ -12,7 +12,7 @@ import {
   TransactionsApiPath,
   TransactionsApiTag,
 } from '../transactions-api.constants';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiNoContentResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags(TransactionsApiTag)
 @Controller(TransactionsApiPath)
@@ -21,6 +21,10 @@ export class RemoveTransactionsController {
     private readonly removeTransactionsService: RemoveTransactionsService,
   ) {}
 
+  @ApiOperation({ summary: 'delete an transaction' })
+  @ApiNoContentResponse({
+    description: 'No content',
+  })
   @Delete(':transactionId')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(

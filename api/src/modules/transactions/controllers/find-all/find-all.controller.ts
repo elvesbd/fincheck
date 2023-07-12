@@ -26,7 +26,7 @@ export class FindAllTransactionsController {
     private readonly findAllTransactionsService: FindAllTransactionsService,
   ) {}
 
-  @ApiOperation({ summary: 'find all all transactions by user id' })
+  @ApiOperation({ summary: 'find all all transactions' })
   @ApiOkResponse({ type: [TransactionResponseDto] })
   @ApiQuery({ name: 'bankAccountId', required: false })
   @ApiQuery({
