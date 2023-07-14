@@ -4,6 +4,7 @@ import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
 import { Encrypt } from 'src/shared/adapters/cryptography/jwt';
 import { GetUserByEmailService } from 'src/modules/users/application/services';
 import { UserResponseDto } from 'src/modules/users/dto';
+import { UserDataBuilder } from 'src/modules/users/__mocks__/data-builder';
 
 describe('SigninService', () => {
   let sut: SigninService;
@@ -11,12 +12,7 @@ describe('SigninService', () => {
   let encrypt: Encrypt;
   let getUserByEmailService: GetUserByEmailService;
 
-  const user: UserResponseDto = {
-    id: 'b013f8f4-804e-4816-b799-46044d86816c',
-    name: 'John Doe',
-    email: 'john@mail.com',
-    password: '123456',
-  };
+  const user: UserResponseDto = UserDataBuilder.aUser().build();
 
   beforeEach(async () => {
     const HasherProvider = {
