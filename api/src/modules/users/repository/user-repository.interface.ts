@@ -1,5 +1,5 @@
 import { CreateUserDto } from '../application/services/create/dto/create-user.dto';
-import { UserResponseDto } from '../application/services/create/dto/user-response.dto';
+import { UserResponseDto } from '../dto';
 
 export interface UserRepository {
   getById(id: string): Promise<UserResponseDto>;

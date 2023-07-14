@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserResponseDto } from '../create/dto/user-response.dto';
+import { UserResponseDto } from 'src/modules/users/dto';
 import { UserRepository } from 'src/modules/users/repository';
 
 @Injectable()

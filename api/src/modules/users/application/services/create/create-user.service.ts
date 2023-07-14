@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UserResponseDto } from './dto/user-response.dto';
 import { UserRepository } from 'src/modules/users/repository';
 import { UserRegistrationException } from 'src/modules/users/exceptions';
+import { UserResponseDto } from 'src/modules/users/dto';
 
 @Injectable()
 export class CreateUserService {

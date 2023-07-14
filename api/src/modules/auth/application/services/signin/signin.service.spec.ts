@@ -3,7 +3,7 @@ import { SigninService } from './signin.service';
 import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
 import { Encrypt } from 'src/shared/adapters/cryptography/jwt';
 import { GetUserByEmailService } from 'src/modules/users/application/services';
-import { UserResponseDto } from 'src/modules/users/application/services/create/dto/user-response.dto';
+import { UserResponseDto } from 'src/modules/users/dto';
 
 describe('SigninService', () => {
   let sut: SigninService;
