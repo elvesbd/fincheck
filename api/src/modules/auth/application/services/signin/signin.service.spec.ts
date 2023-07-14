@@ -5,6 +5,8 @@ import { Encrypt } from 'src/shared/adapters/cryptography/jwt';
 import { GetUserByEmailService } from 'src/modules/users/application/services';
 import { UserResponseDto } from 'src/modules/users/dto';
 import { UserDataBuilder } from 'src/modules/users/__mocks__/data-builder';
+import { UnauthorizedException } from '@nestjs/common';
+import { SigninDto } from 'src/modules/auth/dto/signin';
 
 describe('SigninService', () => {
   let sut: SigninService;
@@ -15,6 +17,8 @@ describe('SigninService', () => {
   const user: UserResponseDto = UserDataBuilder.aUser().build();
 
   beforeEach(async () => {
+    jest.clearAllMocks();
+
     const HasherProvider = {
       provide: 'HASHER',
       useValue: {
@@ -58,5 +62,19 @@ describe('SigninService', () => {
     expect(hash).toBeDefined();
     expect(encrypt).toBeDefined();
     expect(getUserByEmailService).toBeDefined();
+  });
+
+  describe('execute()', () => {
+    const signinDto: SigninDto = {
+      email: 'john@mail.com',
+      password: '123456',
+    };
+
+    it('should throw an exception if the user searched for by email is not found', async () => {
+      jest.spyOn(getUserByEmailService, 'execute').mockResolvedValueOnce(null);
+      await expect(sut.execute(signinDto)).rejects.toThrow(
+        new UnauthorizedException('Invalid credentials!'),
+      );
+    });
   });
 });
