@@ -15,6 +15,8 @@ describe('SigninService', () => {
   let getUserByEmailService: GetUserByEmailService;
 
   const user: UserResponseDto = UserDataBuilder.aUser().build();
+  const accessToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZTcyMTUzOC04ODc3LTRlZjAtYmEwYy01YzljNmNmNTUyZDAiLCJpYXQiOjE2ODkxNjQ1OTksImV4cCI6MTY4OTc2OTM5OX0.iIXevPgmBSz4zZUFY0t-rxRlCUcisSnT8qlelDqHiw0';
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -29,7 +31,7 @@ describe('SigninService', () => {
     const EncryptProvider = {
       provide: 'ENCRYPT',
       useValue: {
-        signAsync: jest.fn().mockResolvedValue('accessToken'),
+        signAsync: jest.fn().mockResolvedValue(accessToken),
       },
     };
 
@@ -66,8 +68,8 @@ describe('SigninService', () => {
 
   describe('execute()', () => {
     const signinDto: SigninDto = {
-      email: 'invalid_email@mail.com',
-      password: '123456',
+      email: 'any_email@mail.com',
+      password: 'any_password',
     };
 
     it('should throw an exception if the user searched for by email is not found', async () => {
@@ -82,6 +84,12 @@ describe('SigninService', () => {
       await expect(sut.execute(signinDto)).rejects.toThrow(
         new UnauthorizedException('Invalid credentials!'),
       );
+    });
+
+    it('should be return an access token on success', async () => {
+      const result = await sut.execute(signinDto);
+      expect(result).toBeDefined();
+      expect(result).toStrictEqual({ accessToken });
     });
   });
 });
