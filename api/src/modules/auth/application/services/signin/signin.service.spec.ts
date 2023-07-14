@@ -66,12 +66,19 @@ describe('SigninService', () => {
 
   describe('execute()', () => {
     const signinDto: SigninDto = {
-      email: 'john@mail.com',
+      email: 'invalid_email@mail.com',
       password: '123456',
     };
 
     it('should throw an exception if the user searched for by email is not found', async () => {
       jest.spyOn(getUserByEmailService, 'execute').mockResolvedValueOnce(null);
+      await expect(sut.execute(signinDto)).rejects.toThrow(
+        new UnauthorizedException('Invalid credentials!'),
+      );
+    });
+
+    it('should return an exception if the entered password is different from the user password', async () => {
+      jest.spyOn(hash, 'compare').mockResolvedValueOnce(false);
       await expect(sut.execute(signinDto)).rejects.toThrow(
         new UnauthorizedException('Invalid credentials!'),
       );
