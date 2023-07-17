@@ -72,6 +72,14 @@ describe('SigninService', () => {
       password: 'any_password',
     };
 
+    it('should be ensures that getUserByEmailService.execute is called with the correct parameters', async () => {
+      await sut.execute(signinDto);
+      expect(getUserByEmailService.execute).toHaveBeenCalledTimes(1);
+      expect(getUserByEmailService.execute).toHaveBeenCalledWith(
+        signinDto.email,
+      );
+    });
+
     it('should throw an exception if the user searched for by email is not found', async () => {
       jest.spyOn(getUserByEmailService, 'execute').mockResolvedValueOnce(null);
       await expect(sut.execute(signinDto)).rejects.toThrow(
