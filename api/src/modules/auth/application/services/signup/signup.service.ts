@@ -1,10 +1,10 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { SignupDto, SignupResponseDto } from 'src/modules/auth/dto/signup';
-import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
 import {
   CreateUserService,
   GetUserByEmailService,
 } from 'src/modules/users/application/services';
+import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
 import {
   Encrypt,
   EncryptedPayloadDto,
