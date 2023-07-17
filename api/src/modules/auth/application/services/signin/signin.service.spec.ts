@@ -103,6 +103,12 @@ describe('SigninService', () => {
       );
     });
 
+    it('should be ensures that encrypt.signAsync is called with the correct parameters', async () => {
+      await sut.execute(signinDto);
+      expect(encrypt.signAsync).toHaveBeenCalledTimes(1);
+      expect(encrypt.signAsync).toHaveBeenCalledWith({ sub: user.id });
+    });
+
     it('should be return an access token on success', async () => {
       const result = await sut.execute(signinDto);
       expect(result).toBeDefined();
