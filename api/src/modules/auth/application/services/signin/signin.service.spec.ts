@@ -87,6 +87,15 @@ describe('SigninService', () => {
       );
     });
 
+    it('should be ensures that hash.compare is called with the correct parameters', async () => {
+      await sut.execute(signinDto);
+      expect(hash.compare).toHaveBeenCalledTimes(1);
+      expect(hash.compare).toHaveBeenCalledWith(
+        signinDto.password,
+        user.password,
+      );
+    });
+
     it('should return an exception if the entered password is different from the user password', async () => {
       jest.spyOn(hash, 'compare').mockResolvedValueOnce(false);
       await expect(sut.execute(signinDto)).rejects.toThrow(
