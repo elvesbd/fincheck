@@ -1,11 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateBankAccountsService } from './create.service';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
-import { BankAccountResponseDto } from 'src/modules/bank-accounts/dto/bank-account-response.dto';
 import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/data-builder';
-import { CreateBankAccountDto } from 'src/modules/bank-accounts/controllers/create/dto/create-bank-account.dto';
 import { BankAccountType } from 'src/modules/bank-accounts/enums/type.enum';
 import { CreateBankAccountException } from 'src/modules/bank-accounts/exceptions';
+import {
+  BankAccountResponseDto,
+  CreateBankAccountDto,
+} from 'src/modules/bank-accounts/dtos';
 
 describe('CreateBankAccountsService', () => {
   let sut: CreateBankAccountsService;

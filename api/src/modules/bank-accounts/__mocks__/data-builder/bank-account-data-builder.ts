@@ -1,4 +1,4 @@
-import { BankAccountResponseDto } from '../../dto/bank-account-response.dto';
+import { BankAccountResponseDto } from '../../dtos/bank-account-response.dto';
 
 export class BankAccountDataBuilder {
   private bankAccountResponseDto: BankAccountResponseDto = {

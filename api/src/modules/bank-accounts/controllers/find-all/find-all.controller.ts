@@ -11,7 +11,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { BankAccountWithBalanceResponseDto } from './dto/bank-account-with-balance-response.dto';
+import { BankAccountWithBalanceResponseDto } from '../../dtos';
 
 @ApiBearerAuth('JWT-auth')
 @ApiTags(BankAccountsApiTag)

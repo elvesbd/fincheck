@@ -14,9 +14,7 @@ import {
 } from '../bank-accounts-api.constants';
 import {
   ApiBearerAuth,
-  ApiInternalServerErrorResponse,
   ApiNoContentResponse,
-  ApiNotFoundResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';

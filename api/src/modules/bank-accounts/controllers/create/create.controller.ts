@@ -1,5 +1,4 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { CreateBankAccountDto } from './dto/create-bank-account.dto';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { CreateBankAccountsService } from '../../application/services/create/create.service';
 import {
@@ -13,7 +12,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { BankAccountResponseDto } from '../../dto/bank-account-response.dto';
+import { BankAccountResponseDto, CreateBankAccountDto } from '../../dtos';
 
 @ApiBearerAuth('JWT-auth')
 @ApiTags(BankAccountsApiTag)

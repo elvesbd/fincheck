@@ -1,5 +1,4 @@
 import { Controller, Body, Put, Param, ParseUUIDPipe } from '@nestjs/common';
-import { UpdateBankAccountDto } from './dto/update-bank-account.dto';
 import { ExtractUserId } from 'src/shared/decorators/extract-user-id.decorator';
 import { UpdateBankAccountsService } from '../../application/services/update/update.service';
 import {
@@ -12,7 +11,8 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { BankAccountResponseDto } from '../../dto/bank-account-response.dto';
+import { BankAccountResponseDto } from '../../dtos/bank-account-response.dto';
+import { UpdateBankAccountDto } from '../../dtos';
 
 @ApiBearerAuth('JWT-auth')
 @ApiTags(BankAccountsApiTag)
