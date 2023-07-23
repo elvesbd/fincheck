@@ -22,35 +22,36 @@ describe('SignupService', () => {
   let createUserService: CreateUserService;
   let getUserByEmailService: GetUserByEmailService;
 
-  const HasherProvider = {
-    provide: 'HASHER',
-    useValue: {
-      hash: jest.fn().mockResolvedValue('any_hash'),
-    },
-  };
-
-  const EncryptProvider = {
-    provide: 'ENCRYPT',
-    useValue: {
-      signAsync: jest.fn().mockResolvedValue(accessToken),
-    },
-  };
-
-  const CreateUserServiceProvider = {
-    provide: CreateUserService,
-    useValue: {
-      execute: jest.fn().mockResolvedValue(user),
-    },
-  };
-
-  const GetUserByEmailServiceProvide = {
-    provide: GetUserByEmailService,
-    useValue: {
-      execute: jest.fn().mockResolvedValue(null),
-    },
-  };
-
   beforeEach(async () => {
+    jest.clearAllMocks();
+
+    const HasherProvider = {
+      provide: 'HASHER',
+      useValue: {
+        hash: jest.fn().mockResolvedValue('any_hash'),
+      },
+    };
+
+    const EncryptProvider = {
+      provide: 'ENCRYPT',
+      useValue: {
+        signAsync: jest.fn().mockResolvedValue(accessToken),
+      },
+    };
+
+    const CreateUserServiceProvider = {
+      provide: CreateUserService,
+      useValue: {
+        execute: jest.fn().mockResolvedValue(user),
+      },
+    };
+
+    const GetUserByEmailServiceProvide = {
+      provide: GetUserByEmailService,
+      useValue: {
+        execute: jest.fn().mockResolvedValue(null),
+      },
+    };
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         HasherProvider,
