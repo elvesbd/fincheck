@@ -54,5 +54,10 @@ describe('CreateBankAccountsService', () => {
         new CreateBankAccountException(),
       );
     });
+
+    it('should return an bank account created on success', async () => {
+      const result = await sut.execute(id, createBankAccountDto);
+      expect(result).toStrictEqual(bankAccount);
+    });
   });
 });
