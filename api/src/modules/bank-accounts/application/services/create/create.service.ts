@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateBankAccountDto } from 'src/modules/bank-accounts/controllers/create/dto/create-bank-account.dto';
 import { BankAccountResponseDto } from 'src/modules/bank-accounts/dto/bank-account-response.dto';
-import { CreateBankAccountException } from 'src/modules/bank-accounts/exceptions/create-bank-account.exception';
+import { CreateBankAccountException } from 'src/modules/bank-accounts/exceptions';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
 
 @Injectable()
