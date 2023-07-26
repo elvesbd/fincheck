@@ -6,22 +6,22 @@ export class TransactionResponseDto {
   id: string;
 
   @ApiProperty()
-  userId: string;
+  userId?: string;
 
   @ApiProperty()
-  bankAccountId: string;
+  bankAccountId?: string;
 
   @ApiProperty()
-  categoryId: string;
+  categoryId?: string;
 
   @ApiProperty()
-  name: string;
+  name?: string;
 
   @ApiProperty()
   value: number;
 
   @ApiProperty()
-  date: Date;
+  date?: Date;
 
   @ApiProperty({ enum: TransactionType })
   type: string;

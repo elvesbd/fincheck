@@ -14,6 +14,11 @@ export class BankAccountDataBuilder {
     return new BankAccountDataBuilder();
   }
 
+  withInitialBalance(): this {
+    this.bankAccountResponseDto.initialBalance = 1000;
+    return this;
+  }
+
   build(): BankAccountResponseDto {
     return this.bankAccountResponseDto;
   }

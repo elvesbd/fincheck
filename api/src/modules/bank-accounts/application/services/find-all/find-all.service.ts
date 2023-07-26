@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { BankAccountWithBalanceResponseDto } from 'src/modules/bank-accounts/dtos';
-import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
-import { BankAccountDto } from 'src/modules/bank-accounts/repository/dto/bank-account.dto';
+import { BankAccountsRepository } from 'src/modules/bank-accounts/repository';
+import { BankAccountDto } from 'src/modules/bank-accounts/repository/dto';
 
 @Injectable()
 export class FindAllBankAccountsService {
