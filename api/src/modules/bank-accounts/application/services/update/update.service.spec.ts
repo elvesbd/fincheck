@@ -77,5 +77,15 @@ describe('UpdateBankAccountsService', () => {
         userId,
       );
     });
+
+    it('should call bankAccountsRepository.remove with the correct parameters', async () => {
+      await sut.execute(id, userId, updateBankAccountDto);
+
+      expect(bankAccountsRepository.update).toHaveBeenCalledTimes(1);
+      expect(bankAccountsRepository.update).toHaveBeenCalledWith(
+        id,
+        updateBankAccountDto,
+      );
+    });
   });
 });
