@@ -2,11 +2,19 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UpdateBankAccountsService } from './update.service';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository';
 import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain';
+import {
+  BankAccountResponseDto,
+  UpdateBankAccountDto,
+} from 'src/modules/bank-accounts/dtos';
+import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/data-builder';
 
 describe('UpdateBankAccountsService', () => {
   let sut: UpdateBankAccountsService;
   let bankAccountsRepository: BankAccountsRepository;
   let validateBankAccountOwnerShipService: ValidateBankAccountOwnerShipService;
+
+  const bankAccount: BankAccountResponseDto =
+    BankAccountDataBuilder.aBankAccount().build();
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -14,14 +22,14 @@ describe('UpdateBankAccountsService', () => {
     const BankAccountsRepositoryProvider = {
       provide: 'BANK_ACCOUNTS_REPOSITORY',
       useValue: {
-        remove: jest.fn().mockResolvedValue(void 0),
+        update: jest.fn().mockResolvedValue(bankAccount),
       },
     };
 
     const ValidateBankAccountOwnerShipServiceProvider = {
       provide: ValidateBankAccountOwnerShipService,
       useValue: {
-        update: jest.fn().mockResolvedValue(void 0),
+        execute: jest.fn().mockResolvedValue(void 0),
       },
     };
     const module: TestingModule = await Test.createTestingModule({
@@ -46,5 +54,28 @@ describe('UpdateBankAccountsService', () => {
     expect(sut).toBeDefined();
     expect(bankAccountsRepository).toBeDefined();
     expect(validateBankAccountOwnerShipService).toBeDefined();
+  });
+
+  describe('execute()', () => {
+    const id = 'b013f8f4-804e-4816-b799-46044d86832a';
+    const userId = 'b013f8f4-804e-4816-b799-46044d86816c';
+    const updateBankAccountDto: UpdateBankAccountDto = {
+      name: 'Ebd Bank',
+      initialBalance: 2000,
+      type: 'CHECKING',
+      color: '#777777',
+    };
+
+    it('should call validateBankAccountOwnerShipService.execute with the correct parameters', async () => {
+      await sut.execute(id, userId, updateBankAccountDto);
+
+      expect(validateBankAccountOwnerShipService.execute).toHaveBeenCalledTimes(
+        1,
+      );
+      expect(validateBankAccountOwnerShipService.execute).toHaveBeenCalledWith(
+        id,
+        userId,
+      );
+    });
   });
 });
