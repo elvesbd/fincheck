@@ -63,6 +63,16 @@ describe('FindAllBankAccountsService', () => {
   describe('execute()', () => {
     const id = 'b013f8f4-804e-4816-b799-46044d86832a';
 
+    it('ensures that bankAccountsRepository.findTransactionsByUserId called with correct param', async () => {
+      await sut.execute(id);
+      expect(
+        bankAccountsRepository.findTransactionsByUserId,
+      ).toHaveBeenCalledTimes(1);
+      expect(
+        bankAccountsRepository.findTransactionsByUserId,
+      ).toHaveBeenCalledWith(id);
+    });
+
     it('ensures that returns a bank account with the calculation of the current balance when there are EXPENSE type transactions', async () => {
       jest
         .spyOn(bankAccountsRepository, 'findTransactionsByUserId')
