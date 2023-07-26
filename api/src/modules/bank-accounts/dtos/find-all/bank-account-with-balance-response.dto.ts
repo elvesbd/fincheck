@@ -2,6 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 class PartialTransaction {
   @ApiProperty()
+  id: string;
+
+  @ApiProperty()
   type: string;
 
   @ApiProperty()

@@ -19,6 +19,7 @@ export class BankAccountsRepositoryPrismaAdapter
       include: {
         transactions: {
           select: {
+            id: true,
             type: true,
             value: true,
           },
