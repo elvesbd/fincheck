@@ -16,6 +16,10 @@ describe('UpdateBankAccountsService', () => {
   const bankAccount: BankAccountResponseDto =
     BankAccountDataBuilder.aBankAccount().build();
 
+  const bankAccountWithUpdate = BankAccountDataBuilder.aBankAccount()
+    .withUpdates()
+    .build();
+
   beforeEach(async () => {
     jest.clearAllMocks();
 
@@ -86,6 +90,15 @@ describe('UpdateBankAccountsService', () => {
         id,
         updateBankAccountDto,
       );
+    });
+
+    it('should return an bank account updated', async () => {
+      jest
+        .spyOn(bankAccountsRepository, 'update')
+        .mockResolvedValueOnce(bankAccountWithUpdate);
+
+      const result = await sut.execute(id, userId, updateBankAccountDto);
+      expect(result).toStrictEqual(bankAccountWithUpdate);
     });
   });
 });
