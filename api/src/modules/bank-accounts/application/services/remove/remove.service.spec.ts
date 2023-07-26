@@ -48,4 +48,21 @@ describe('RemoveBankAccountsService', () => {
     expect(bankAccountsRepository).toBeDefined();
     expect(validateBankAccountOwnerShipService).toBeDefined();
   });
+
+  describe('execute()', () => {
+    const id = 'b013f8f4-804e-4816-b799-46044d86832a';
+    const userId = 'b013f8f4-804e-4816-b799-46044d86816c';
+
+    it('should call validateBankAccountOwnerShipService.execute with the correct parameters', async () => {
+      await sut.execute(id, userId);
+
+      expect(validateBankAccountOwnerShipService.execute).toHaveBeenCalledTimes(
+        1,
+      );
+      expect(validateBankAccountOwnerShipService.execute).toHaveBeenCalledWith(
+        id,
+        userId,
+      );
+    });
+  });
 });
