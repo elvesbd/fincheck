@@ -13,9 +13,7 @@ export class BankAccountsRepositoryPrismaAdapter
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findTransactionsByUserIdAndAccountId(
-    id: string,
-  ): Promise<BankAccount[]> {
+  async findTransactionsByUserId(id: string): Promise<BankAccount[]> {
     return await this.prismaService.bankAccount.findMany({
       where: { userId: id },
       include: {

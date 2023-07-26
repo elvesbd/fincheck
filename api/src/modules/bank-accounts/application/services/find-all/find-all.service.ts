@@ -12,9 +12,7 @@ export class FindAllBankAccountsService {
 
   async execute(id: string): Promise<BankAccountWithBalanceResponseDto[]> {
     const bankAccounts =
-      await this.bankAccountsRepository.findTransactionsByUserIdAndAccountId(
-        id,
-      );
+      await this.bankAccountsRepository.findTransactionsByUserId(id);
 
     return bankAccounts.map((bankAccount) =>
       this.calculateCurrentBalance(bankAccount),

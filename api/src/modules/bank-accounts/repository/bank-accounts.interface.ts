@@ -9,9 +9,7 @@ export interface BankAccountsRepository {
     id: string,
     createBankAccountDto: CreateBankAccountDto,
   ): Promise<BankAccountResponseDto>;
-  findTransactionsByUserIdAndAccountId(
-    id: string,
-  ): Promise<BankAccountResponseDto[]>;
+  findTransactionsByUserId(id: string): Promise<BankAccountResponseDto[]>;
   findOneByIdAndUserId(
     id: string,
     userId: string,
