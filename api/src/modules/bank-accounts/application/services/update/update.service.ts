@@ -4,7 +4,7 @@ import {
   BankAccountResponseDto,
   UpdateBankAccountDto,
 } from 'src/modules/bank-accounts/dtos';
-import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
+import { BankAccountsRepository } from 'src/modules/bank-accounts/repository';
 
 @Injectable()
 export class UpdateBankAccountsService {
