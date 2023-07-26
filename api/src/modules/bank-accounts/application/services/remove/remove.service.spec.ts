@@ -64,5 +64,12 @@ describe('RemoveBankAccountsService', () => {
         userId,
       );
     });
+
+    it('should call bankAccountsRepository.remove with the correct parameters', async () => {
+      await sut.execute(id, userId);
+
+      expect(bankAccountsRepository.remove).toHaveBeenCalledTimes(1);
+      expect(bankAccountsRepository.remove).toHaveBeenCalledWith(id);
+    });
   });
 });
