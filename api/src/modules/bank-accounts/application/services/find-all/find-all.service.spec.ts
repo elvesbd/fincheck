@@ -22,6 +22,19 @@ describe('FindAllBankAccountsService', () => {
     ],
   };
 
+  const bankAccountWithInitialBalance: BankAccountResponseDto =
+    BankAccountDataBuilder.aBankAccount().withInitialBalance().build();
+  const bankAccountsWithInitialBalance: BankAccountDto = {
+    ...bankAccountWithInitialBalance,
+    transactions: [
+      {
+        id: 'b172f8f4-804e-4816-b799-46122d86825c',
+        type: 'EXPENSE',
+        value: 500,
+      },
+    ],
+  };
+
   beforeEach(async () => {
     jest.clearAllMocks();
 
@@ -49,6 +62,15 @@ describe('FindAllBankAccountsService', () => {
 
   describe('execute()', () => {
     const id = 'b013f8f4-804e-4816-b799-46044d86832a';
+
+    it('ensures that returns a bank account with the calculation of the current balance when there are EXPENSE type transactions', async () => {
+      jest
+        .spyOn(bankAccountsRepository, 'findTransactionsByUserId')
+        .mockResolvedValueOnce([bankAccountsWithInitialBalance]);
+
+      const result = await sut.execute(id);
+      expect(result[0].currentBalance).toBe(500);
+    });
 
     it('ensures that returns a bank account with the calculation of the current balance when there are INCOME type transactions', async () => {
       const result = await sut.execute(id);
