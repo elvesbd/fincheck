@@ -63,7 +63,7 @@ describe('FindAllBankAccountsService', () => {
   describe('execute()', () => {
     const id = 'b013f8f4-804e-4816-b799-46044d86832a';
 
-    it('ensures that bankAccountsRepository.findTransactionsByUserId called with correct param', async () => {
+    it('should call bankAccountsRepository.findTransactionsByUserId with the correct parameter', async () => {
       await sut.execute(id);
       expect(
         bankAccountsRepository.findTransactionsByUserId,
@@ -73,7 +73,7 @@ describe('FindAllBankAccountsService', () => {
       ).toHaveBeenCalledWith(id);
     });
 
-    it('ensures that returns a bank account with the calculation of the current balance when there are EXPENSE type transactions', async () => {
+    it('should return a bank account with the current balance calculated when there are EXPENSE type transactions', async () => {
       jest
         .spyOn(bankAccountsRepository, 'findTransactionsByUserId')
         .mockResolvedValueOnce([bankAccountsWithInitialBalance]);
@@ -82,7 +82,7 @@ describe('FindAllBankAccountsService', () => {
       expect(result[0].currentBalance).toBe(500);
     });
 
-    it('ensures that returns a bank account with the calculation of the current balance when there are INCOME type transactions', async () => {
+    it('should return a bank account with the current balance calculated when there are INCOME type transactions', async () => {
       const result = await sut.execute(id);
       expect(result[0].currentBalance).toBe(1000);
     });
