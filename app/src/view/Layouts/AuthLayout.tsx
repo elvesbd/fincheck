@@ -1,4 +1,5 @@
-import illustration from '../../assets/illustration.png'
+import illustration from '../../assets/illustration.png';
+import { Logo } from '../Components/Logo';
 
 export function AuthLayout() {
   return (
@@ -11,8 +12,9 @@ export function AuthLayout() {
           className="object-cover w-full h-full max-w-[600px] max-h-[750px] select-none rounded-[32px]"
         />
 
-        <div className="max-w-[600px] bg-white p-10 absolute rounded-b-[32px] bottom-8">
-          <p>
+        <div className="max-w-[600px]  bottom-6 bg-white p-10 absolute rounded-b-[32px] text-red-500">
+          <Logo />
+          <p className="text-gray-700 font-medium text-xl mt-6">
             Gerencie suas finanças pessoais de uma forma simples com o fincheck, e o melhor de tudo, totalmente grátis!
           </p>
         </div>
