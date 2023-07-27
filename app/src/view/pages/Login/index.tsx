@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Input } from "../../Components/Input";
+import { Button } from "../../Components/Button";
 
 export function Login() {
   return (
-    <div>
+    <>
       <header className="flex flex-col items-center gap-4">
         <h1 className="text-2xl font-bold text-gray-900 tracking-[-1px]">
           Entre em sua conta
@@ -32,10 +33,10 @@ export function Login() {
           placeholder="Senha"
         />
 
-        <button type="submit" className="mt-2">
+        <Button type="submit" className="mt-2">
           Entrar
-        </button>
+        </Button>
       </form>
-    </div>
+    </>
   )
 }
