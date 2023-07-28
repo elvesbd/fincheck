@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
-
-import { authService } from '../../../app/services/auth';
-import { SignupParams } from '../../../app/services/auth/interfaces';
 import { toast } from 'react-hot-toast';
+
+import { SignupParams } from '../../../app/services/auth/interfaces';
+import { authService } from '../../../app/services/auth';
 
 
 const schema = z.object({
@@ -23,7 +23,7 @@ type FormData = z.infer<typeof schema>;
 
 export function useRegister() {
   const {
-    handleSubmit: hookFormHandleSubmit,
+    handleSubmit: hookFormSubmit,
     register,
     formState: { errors },
   } = useForm<FormData>({
@@ -37,7 +37,7 @@ export function useRegister() {
     }
   })
 
-   const handleSubmit = hookFormHandleSubmit(async(data) => {
+   const handleSubmit = hookFormSubmit(async(data) => {
     try {
       await mutateAsync(data);
     } catch {

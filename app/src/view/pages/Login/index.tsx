@@ -5,7 +5,7 @@ import { useLogin } from "./useLogin";
 
 
 export function Login() {
-  const { handleSubmit, register, errors } = useLogin();
+  const { handleSubmit, register, errors, isLoading } = useLogin();
 
   return (
     <>
@@ -38,7 +38,7 @@ export function Login() {
           {...register("password")}
         />
 
-        <Button type="submit" className="mt-2">
+        <Button type="submit" className="mt-2" isLoading={isLoading}>
           Entrar
         </Button>
       </form>

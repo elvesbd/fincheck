@@ -1,5 +1,6 @@
-import { httpClient } from "../httpClient";
-import { SignupParams, SignupResponse } from "./interfaces";
+import { httpClient } from "../../httpClient";
+import { SignupParams, SignupResponse } from "../interfaces";
+
 
 
 export async function signup(params: SignupParams) {
