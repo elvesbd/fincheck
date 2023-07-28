@@ -10,7 +10,7 @@
 
 <img src="https://i.imgur.com/C8gXR5s.png" alt="exemplo imagem">
 
-> A API de Controle de Finanças fincheck é uma plataforma abrangente projetada para ajudar os usuários a gerenciar suas finanças de forma eficiente. Com esta API, você pode se cadastrar como usuário, cadastrar contas financeiras e criar transações de gastos e depósitos. O processo de cadastro na API é simples e seguro. Após se registrar, você receberá um token de acesso exclusivo, que será necessário para autenticar suas solicitações e obter acesso às funcionalidades disponíveis. No curso foi feito a criação da API, mas procurei andar a milha extra e aplicar alguns conhecimento que tenho adquirido no mercado como [ports and adapters](https://www.youtube.com/watch?v=7SaA3HCOc4c), princípios do [SOLID](https://www.youtube.com/watch?v=mkx0CdWiPRA) e aplicação de tests unitários com [jest](https://jestjs.io/).
+> A API de Controle de Finanças fincheck é uma plataforma abrangente projetada para ajudar os usuários a gerenciar suas finanças de forma eficiente. Com esta API, você pode se cadastrar como usuário, cadastrar contas financeiras e criar transações de gastos e depósitos. O processo de cadastro na API é simples e seguro. Após se registrar, você receberá um token de acesso exclusivo, que será necessário para autenticar suas solicitações e obter acesso às funcionalidades disponíveis.
 
 ### Ajustes e melhorias
 
