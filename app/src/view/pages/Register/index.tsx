@@ -5,7 +5,7 @@ import { useRegister } from "./useRegister";
 
 
 export function Register() {
-  const { handleSubmit, register, errors } = useRegister();
+  const { handleSubmit, register, errors, isLoading } = useRegister();
   console.log('aqui', errors)
 
 
@@ -45,7 +45,7 @@ export function Register() {
           {...register("password")}
         />
 
-        <Button type="submit" className="mt-2">
+        <Button type="submit" className="mt-2" isLoading={isLoading}>
           Criar conta
         </Button>
       </form>
