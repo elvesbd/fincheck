@@ -10,7 +10,7 @@
 
 <img src="https://i.imgur.com/C8gXR5s.png" alt="exemplo imagem">
 
-> A API de Controle de Finanças fincheck é uma plataforma abrangente projetada para ajudar os usuários a gerenciar suas finanças de forma eficiente. Com esta API, você pode se cadastrar como usuário, cadastrar contas financeiras e criar transações de gastos e depósitos. O processo de cadastro na API é simples e seguro. Após se registrar, você receberá um token de acesso exclusivo, que será necessário para autenticar suas solicitações e obter acesso às funcionalidades disponíveis.
+> O APP de Controle de Finanças fincheck é uma plataforma abrangente projetada para ajudar os usuários a gerenciar suas finanças de forma eficiente. Com este APP, você pode se cadastrar como usuário, cadastrar contas financeiras e criar transações de gastos e depósitos. O processo de cadastro no APP é simples e seguro. Após se registrar, você receberá um token de acesso exclusivo, que será necessário para autenticar suas solicitações e obter acesso às funcionalidades disponíveis.
 
 ### Ajustes e melhorias
 
