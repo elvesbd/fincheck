@@ -3,6 +3,7 @@ import { Input } from "../../Components/Input";
 import { Button } from "../../Components/Button";
 import { useLogin } from "./useLogin";
 
+
 export function Login() {
   const { handleSubmit, register, errors } = useLogin();
 
@@ -26,16 +27,16 @@ export function Login() {
         <Input
           type="email"
           placeholder="E-mail"
+          error={errors.email?.message}
           {...register("email")}
           />
-        {errors.email && <span>{errors.email?.message}</span>}
 
         <Input
           type="password"
           placeholder="Senha"
+          error={errors.password?.message}
           {...register("password")}
         />
-        {errors.password && <span>{errors.password?.message}</span>}
 
         <Button type="submit" className="mt-2">
           Entrar
