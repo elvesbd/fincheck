@@ -6,6 +6,7 @@ import { cookieKeys } from "../config/cookieKeys";
 interface AuthContextValue {
   signedIn: boolean;
   signin: (accessToken: string) => void;
+  signout: () => void;
 }
 
 export const AuthContext = createContext({} as AuthContextValue);
@@ -21,8 +22,13 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
     setSignedIn(true);
   }, []);
 
+  const signout = useCallback(() => {
+    cookie.remove(cookieKeys.ACCESS_TOKEN);
+    setSignedIn(false);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ signedIn, signin }}>
+    <AuthContext.Provider value={{ signedIn, signin, signout }}>
       {children}
     </AuthContext.Provider>
   )
