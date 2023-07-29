@@ -40,8 +40,8 @@ export function useLogin() {
 
   const handleSubmit = hookFormSubmit(async(data) => {
     try {
-      await mutateAsync(data);
-      signin();
+      const { accessToken } = await mutateAsync(data);
+      signin(accessToken);
     } catch {
       toast.error("Credenciais inválidas!")
     }
