@@ -6,6 +6,7 @@ import { z } from 'zod';
 
 import { authService } from '../../../app/services/auth';
 import { SigninParams } from '../../../app/services/auth/interfaces';
+import { useAuth } from '../../../app/hooks';
 
 
 const schema = z.object({
@@ -20,6 +21,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function useLogin() {
+  const { signin } = useAuth();
+
   const {
     register,
     handleSubmit: hookFormSubmit,
@@ -38,6 +41,7 @@ export function useLogin() {
   const handleSubmit = hookFormSubmit(async(data) => {
     try {
       await mutateAsync(data);
+      signin();
     } catch {
       toast.error("Credenciais inválidas!")
     }
