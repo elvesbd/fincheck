@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 
 import { SignupParams } from '../../../app/services/auth/interfaces';
 import { authService } from '../../../app/services/auth';
+import { useAuth } from '../../../app/hooks';
 
 
 const schema = z.object({
@@ -22,6 +23,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function useRegister() {
+  const { signin } = useAuth();
+
   const {
     handleSubmit: hookFormSubmit,
     register,
@@ -39,7 +42,8 @@ export function useRegister() {
 
    const handleSubmit = hookFormSubmit(async(data) => {
     try {
-      await mutateAsync(data);
+      const { accessToken } = await mutateAsync(data);
+      signin(accessToken);
     } catch {
       toast.error("Não foi possível criar sua conta!")
     }
