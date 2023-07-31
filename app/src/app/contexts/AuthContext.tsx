@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import cookie from 'js-cookie';
 import { cookieKeys } from "../config/cookieKeys";
 import { useQuery } from "@tanstack/react-query";
@@ -23,8 +23,6 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
   });
-
-  useEffect(() => {}, []);
 
   const signin = useCallback((accessToken: string) => {
     cookie.set(cookieKeys.ACCESS_TOKEN, accessToken);

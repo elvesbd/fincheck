@@ -1,7 +1,17 @@
 import axios from 'axios';
+import cookie from 'js-cookie';
 
-const httpClient = axios.create({
+import { cookieKeys } from '../config/cookieKeys';
+
+export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL
 });
 
-export { httpClient }
+httpClient.interceptors.request.use(config => {
+  const accessToken = cookie.get(cookieKeys.ACCESS_TOKEN);
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
+  }
+
+  return config;
+});
