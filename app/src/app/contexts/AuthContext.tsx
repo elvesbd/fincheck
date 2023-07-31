@@ -5,13 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { usersService } from "../services/users";
 import { toast } from "react-hot-toast";
 import { PageLoader } from "../../view/Components/PageLoader";
+import { AuthContextValue } from "./interfaces/auth-context-value";
 
-
-interface AuthContextValue {
-  signedIn: boolean;
-  signin: (accessToken: string) => void;
-  signout: () => void;
-}
 
 export const AuthContext = createContext({} as AuthContextValue);
 
