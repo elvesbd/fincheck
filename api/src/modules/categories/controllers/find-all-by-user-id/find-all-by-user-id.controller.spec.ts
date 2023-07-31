@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FindAllCategoriesByUserIdController } from './find-all-by-user-id.controller';
-import { FindAllCategoriesByUserIdService } from '../../services/find-all-by-user-id/find-all-by-user-id.service';
+import { FindAllCategoriesByUserIdService } from '../../application/services';
 
 describe('FindAllCategoriesByUserIdController', () => {
   let controller: FindAllCategoriesByUserIdController;
