@@ -101,5 +101,16 @@ describe('ValidateEntitiesOwnerShipService', () => {
         validateEntitiesOwnerShipDto.userId,
       );
     });
+
+    it('should be call validateCategoryOwnerShipService.execute with correct values', async () => {
+      const categoryId = (validateEntitiesOwnerShipDto.categoryId =
+        'f791fb59-c696-4aa0-a472-7115a185ad49');
+      await sut.execute(validateEntitiesOwnerShipDto);
+      expect(validateCategoryOwnerShipService.execute).toHaveBeenCalledTimes(1);
+      expect(validateCategoryOwnerShipService.execute).toHaveBeenCalledWith(
+        categoryId,
+        validateEntitiesOwnerShipDto.userId,
+      );
+    });
   });
 });
