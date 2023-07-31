@@ -60,5 +60,15 @@ describe('ValidateCategoryOwnerShipService', () => {
         userId,
       );
     });
+
+    it('should be return an exception if category not found', async () => {
+      jest
+        .spyOn(categoriesRepository, 'findOneByIdAndUserId')
+        .mockResolvedValueOnce(undefined);
+
+      await expect(sut.execute(id, userId)).rejects.toThrow(
+        new NotFoundException('Category not found'),
+      );
+    });
   });
 });
