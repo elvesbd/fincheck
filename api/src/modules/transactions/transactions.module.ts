@@ -11,12 +11,12 @@ import {
   UpdateTransactionsController,
   RemoveTransactionsController,
 } from './controllers';
-import { CategoriesModule } from '../categories/categories.module';
-import { BankAccountsModule } from '../bank-accounts/bank-accounts.module';
 import {
   ValidateTransactionsOwnershipService,
   ValidateEntitiesOwnerShipService,
-} from './domain';
+} from './application/domain';
+import { CategoriesModule } from '../categories/categories.module';
+import { BankAccountsModule } from '../bank-accounts/bank-accounts.module';
 import { TransactionsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma';
 import { ValidateBankAccountOwnerShipService } from '../bank-accounts/application/domain';
 import { ValidateCategoryOwnerShipService } from '../categories/application/domain';

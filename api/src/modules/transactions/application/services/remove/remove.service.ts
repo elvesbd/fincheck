@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ValidateEntitiesOwnerShipService } from 'src/modules/transactions/domain';
 import { TransactionsRepository } from 'src/modules/transactions/repository';
+import { ValidateEntitiesOwnerShipService } from '../../domain';
 
 @Injectable()
 export class RemoveTransactionsService {
