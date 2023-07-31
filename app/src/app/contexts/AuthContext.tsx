@@ -21,7 +21,7 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
     return !!storedAccessToken;
   });
 
- const { isError, isFetching, isSuccess } = useQuery({
+ const { isError, isFetching, isSuccess, remove } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
     enabled: signedIn,
@@ -35,8 +35,9 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
 
   const signout = useCallback(() => {
     cookie.remove(cookieKeys.ACCESS_TOKEN);
+    remove();
     setSignedIn(false);
-  }, []);
+  }, [remove]);
 
   useEffect(() => {
     if (isError) {
@@ -50,7 +51,8 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
   }
 
   return (
-    <AuthContext.Provider value={{ signedIn: isSuccess, signin, signout }}>
+    <AuthContext.Provider
+      value={{ signedIn: isSuccess && signedIn, signin, signout }}>
       {children}
     </AuthContext.Provider>
   )
