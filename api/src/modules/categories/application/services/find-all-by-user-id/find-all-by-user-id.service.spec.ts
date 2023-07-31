@@ -55,5 +55,11 @@ describe('FindAllCategoriesByUserIdService', () => {
       expect(categoriesRepository.find).toHaveBeenCalledTimes(1);
       expect(categoriesRepository.find).toHaveBeenCalledWith(id);
     });
+
+    it('should be return an categories list by user id', async () => {
+      const result = await sut.execute(id);
+      expect(result).toStrictEqual(categories);
+      expect(result[0].userId).toBe(id);
+    });
   });
 });
