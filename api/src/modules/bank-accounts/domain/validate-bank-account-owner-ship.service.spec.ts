@@ -56,5 +56,15 @@ describe('ValidateBankAccountOwnerShipService', () => {
         userId,
       );
     });
+
+    it('should be return an exception if category not found', async () => {
+      jest
+        .spyOn(bankAccountsRepository, 'findOneByIdAndUserId')
+        .mockResolvedValueOnce(undefined);
+
+      await expect(sut.execute(id, userId)).rejects.toThrow(
+        new NotFoundException('Bank account not found'),
+      );
+    });
   });
 });
