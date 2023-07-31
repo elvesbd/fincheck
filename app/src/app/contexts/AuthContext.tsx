@@ -1,8 +1,9 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import cookie from 'js-cookie';
 import { cookieKeys } from "../config/cookieKeys";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "../services/users";
+import { toast } from "react-hot-toast";
 
 
 interface AuthContextValue {
@@ -19,9 +20,10 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
     return !!storedAccessToken;
   });
 
- useQuery({
+ const { isError } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
+    enabled: signedIn
   });
 
   const signin = useCallback((accessToken: string) => {
@@ -33,6 +35,13 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
     cookie.remove(cookieKeys.ACCESS_TOKEN);
     setSignedIn(false);
   }, []);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error('Sessão expirada!')
+      signout();
+    }
+  }, [isError, signout]);
 
   return (
     <AuthContext.Provider value={{ signedIn, signin, signout }}>
