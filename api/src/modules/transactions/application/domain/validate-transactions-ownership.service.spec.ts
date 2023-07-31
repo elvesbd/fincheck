@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ValidateTransactionsOwnershipService } from './validate-transactions-ownership.service';
 import { TransactionsRepository } from '../../repository';
 import { TransactionResponseDto } from '../../dto';
+import { NotFoundException } from '@nestjs/common';
 
 describe('ValidateTransactionsOwnershipService', () => {
   let sut: ValidateTransactionsOwnershipService;
@@ -53,6 +54,16 @@ describe('ValidateTransactionsOwnershipService', () => {
       expect(transactionRepository.findFirst).toHaveBeenCalledWith(
         transactionId,
         userId,
+      );
+    });
+
+    it('should return an exception if transaction not found', async () => {
+      jest
+        .spyOn(transactionRepository, 'findFirst')
+        .mockResolvedValueOnce(undefined);
+
+      await expect(sut.execute(transactionId, userId)).rejects.toThrow(
+        new NotFoundException('Transaction not found!'),
       );
     });
   });
