@@ -88,5 +88,18 @@ describe('ValidateEntitiesOwnerShipService', () => {
         validateEntitiesOwnerShipDto.userId,
       );
     });
+
+    it('should be call validateBankAccountOwnerShipService.execute with correct values', async () => {
+      const bankAccountId = (validateEntitiesOwnerShipDto.bankAccountId =
+        'f791fb59-c696-4aa0-a472-7115a185ad66');
+      await sut.execute(validateEntitiesOwnerShipDto);
+      expect(validateBankAccountOwnerShipService.execute).toHaveBeenCalledTimes(
+        1,
+      );
+      expect(validateBankAccountOwnerShipService.execute).toHaveBeenCalledWith(
+        bankAccountId,
+        validateEntitiesOwnerShipDto.userId,
+      );
+    });
   });
 });
