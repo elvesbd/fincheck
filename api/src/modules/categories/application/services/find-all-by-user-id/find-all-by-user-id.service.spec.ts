@@ -2,20 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindAllCategoriesByUserIdService } from './find-all-by-user-id.service';
 import { CategoriesRepository } from 'src/modules/categories/repository/categories-repository.interface';
 import { CategoryResponseDto } from 'src/modules/categories/controllers/find-all-by-user-id/dto/category-response.dto';
+import { CategoryDataBuilder } from 'src/modules/categories/__mocks__/category-builder';
 
 describe('FindAllCategoriesByUserIdService', () => {
   let sut: FindAllCategoriesByUserIdService;
   let categoriesRepository: CategoriesRepository;
 
-  const categories: CategoryResponseDto[] = [
-    {
-      id: 'f791fb59-c696-4aa0-a472-7115a185ad49',
-      userId: 'fe721538-8877-4ef0-ba0c-5c9c6cf552d0',
-      name: 'Salário',
-      icon: 'salary',
-      type: 'INCOME',
-    },
-  ];
+  const category: CategoryResponseDto = CategoryDataBuilder.aCategory().build();
+  const categories = [category];
 
   beforeEach(async () => {
     jest.clearAllMocks();

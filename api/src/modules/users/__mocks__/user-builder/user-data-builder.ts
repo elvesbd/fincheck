@@ -1,7 +1,5 @@
-import { Injectable } from '@nestjs/common';
 import { UserResponseDto } from '../../dto';
 
-@Injectable()
 export class UserDataBuilder {
   private userResponseDto: UserResponseDto = {
     id: 'b013f8f4-804e-4816-b799-46044d86816c',

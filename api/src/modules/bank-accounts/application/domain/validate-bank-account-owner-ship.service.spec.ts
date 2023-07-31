@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ValidateBankAccountOwnerShipService } from './validate-bank-account-owner-ship.service';
-import { BankAccountsRepository } from '../repository';
-import { BankAccountResponseDto } from '../dtos';
-import { BankAccountDataBuilder } from '../__mocks__/data-builder';
 import { NotFoundException } from '@nestjs/common';
+import { BankAccountDataBuilder } from '../../__mocks__/bank-account-builder';
+import { BankAccountResponseDto } from '../../dtos';
+import { BankAccountsRepository } from '../../repository';
 
 describe('ValidateBankAccountOwnerShipService', () => {
   let sut: ValidateBankAccountOwnerShipService;

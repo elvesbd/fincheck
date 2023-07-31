@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FindAllBankAccountsService } from './find-all.service';
 import { BankAccountResponseDto } from 'src/modules/bank-accounts/dtos';
-import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/data-builder';
+import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/bank-account-builder';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository';
 import { BankAccountDto } from 'src/modules/bank-accounts/repository/dto';
 

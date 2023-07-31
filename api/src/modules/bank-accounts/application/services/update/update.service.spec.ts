@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UpdateBankAccountsService } from './update.service';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository';
-import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain';
 import {
   BankAccountResponseDto,
   UpdateBankAccountDto,
 } from 'src/modules/bank-accounts/dtos';
-import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/data-builder';
+import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/bank-account-builder';
+import { ValidateBankAccountOwnerShipService } from '../../domain';
 
 describe('UpdateBankAccountsService', () => {
   let sut: UpdateBankAccountsService;

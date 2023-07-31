@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { CategoriesRepository } from '../repository/categories-repository.interface';
+import { CategoriesRepository } from '../../repository/categories-repository.interface';
 
 @Injectable()
 export class ValidateCategoryOwnerShipService {

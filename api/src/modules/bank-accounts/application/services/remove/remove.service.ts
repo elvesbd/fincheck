@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository';
+import { ValidateBankAccountOwnerShipService } from '../../domain';
 
 @Injectable()
 export class RemoveBankAccountsService {

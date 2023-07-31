@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateBankAccountsService } from './create.service';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository/bank-accounts.interface';
-import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/data-builder';
+import { BankAccountDataBuilder } from 'src/modules/bank-accounts/__mocks__/bank-account-builder';
 import { BankAccountType } from 'src/modules/bank-accounts/enums/type.enum';
 import { CreateBankAccountException } from 'src/modules/bank-accounts/exceptions';
 import {

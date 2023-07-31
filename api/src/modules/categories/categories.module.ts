@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ValidateCategoryOwnerShipService } from './domain';
 import { CategoriesRepositoryPrismaAdapter } from 'src/shared/adapters/prisma';
 import { FindAllCategoriesByUserIdController } from './controllers';
 import { FindAllCategoriesByUserIdService } from './application/services';
+import { ValidateCategoryOwnerShipService } from './application/domain';
 
 @Module({
   controllers: [FindAllCategoriesByUserIdController],

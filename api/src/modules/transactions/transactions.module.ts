@@ -17,9 +17,9 @@ import {
   ValidateTransactionsOwnershipService,
   ValidateEntitiesOwnerShipService,
 } from './domain';
-import { ValidateCategoryOwnerShipService } from '../categories/domain';
-import { ValidateBankAccountOwnerShipService } from '../bank-accounts/domain';
 import { TransactionsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma';
+import { ValidateBankAccountOwnerShipService } from '../bank-accounts/application/domain';
+import { ValidateCategoryOwnerShipService } from '../categories/application/domain';
 
 const controllers = [
   CreateTransactionsController,

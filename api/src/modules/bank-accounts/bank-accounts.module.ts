@@ -7,8 +7,8 @@ import { CreateBankAccountsService } from './application/services/create/create.
 import { FindAllBankAccountsService } from './application/services/find-all/find-all.service';
 import { RemoveBankAccountsService } from './application/services/remove/remove.service';
 import { UpdateBankAccountsService } from './application/services/update/update.service';
-import { ValidateBankAccountOwnerShipService } from './domain';
 import { BankAccountsRepositoryPrismaAdapter } from 'src/shared/adapters/prisma';
+import { ValidateBankAccountOwnerShipService } from './application/domain';
 
 const bankAccountsControllers = [
   CreateBankAccountsController,

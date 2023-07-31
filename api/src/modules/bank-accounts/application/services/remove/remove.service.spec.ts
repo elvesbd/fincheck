@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RemoveBankAccountsService } from './remove.service';
 import { BankAccountsRepository } from 'src/modules/bank-accounts/repository';
-import { ValidateBankAccountOwnerShipService } from 'src/modules/bank-accounts/domain';
+import { ValidateBankAccountOwnerShipService } from '../../domain';
 
 describe('RemoveBankAccountsService', () => {
   let sut: RemoveBankAccountsService;
