@@ -2,9 +2,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css'
 
 import { EyeIcon } from "../../../../Components/icons/EyeIcon";
-import { AccountCard } from "../AccountCard";
-import { AccountSliderNavigation } from "../AccountsSliderNavigation";
 import { useAccounts } from "./useAccounts";
+import { SliderNavigation } from "./SliderNavigation";
+import { Card } from "./Card";
 
 export function Accounts() {
   const { sliderState, setSliderState, windowWidth } = useAccounts();
@@ -41,14 +41,14 @@ export function Accounts() {
                 Minhas contas
               </strong>
 
-              <AccountSliderNavigation
+              <SliderNavigation
                 isBeginning={sliderState.isBeginning}
                 isEnd={sliderState.isEnd}
               />
             </div>
 
             <SwiperSlide>
-              <AccountCard
+              <Card
                 color="#7950f2"
                 name="Nubank"
                 balance={123}
@@ -57,7 +57,7 @@ export function Accounts() {
             </SwiperSlide>
 
             <SwiperSlide>
-              <AccountCard
+              <Card
                 color="#333333"
                 name="XP"
                 balance={123.55}
@@ -66,7 +66,7 @@ export function Accounts() {
             </SwiperSlide>
 
             <SwiperSlide>
-              <AccountCard
+              <Card
                 color="#0f0"
                 name="Carteira"
                 balance={1000}

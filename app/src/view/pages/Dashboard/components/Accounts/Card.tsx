@@ -9,7 +9,7 @@ interface AccountCardProps {
   type: 'CASH' | 'CHECKING'| 'INVESTMENT';
 }
 
-export function AccountCard({ color, name, balance, type }: AccountCardProps) {
+export function Card({ color, name, balance, type }: AccountCardProps) {
   return(
     <div
       className="p-4 bg-white rounded-2xl h-[200px] flex flex-col justify-between border-b-teal-950 border-b-4"
