@@ -27,7 +27,7 @@ export function Accounts() {
             spaceBetween={16}
             slidesPerView={2.2}
           >
-            <div className="flex items-center justify-between" slot="container-start">
+            <div className="flex items-center justify-between mb-4" slot="container-start">
               <strong className="text-white tracking-[-1px] text-lg">
                 Minhas contas
               </strong>
@@ -35,34 +35,32 @@ export function Accounts() {
               <AccountSliderNavigation />
             </div>
 
-            <div className="mt-4">
-              <SwiperSlide>
-                <AccountCard
-                  color="#7950f2"
-                  name="Nubank"
-                  balance={123}
-                  type="CASH"
-                />
-              </SwiperSlide>
+            <SwiperSlide>
+              <AccountCard
+                color="#7950f2"
+                name="Nubank"
+                balance={123}
+                type="CASH"
+              />
+            </SwiperSlide>
 
-              <SwiperSlide>
-                <AccountCard
-                  color="#333333"
-                  name="XP"
-                  balance={123.55}
-                  type="INVESTMENT"
-                />
-              </SwiperSlide>
+            <SwiperSlide>
+              <AccountCard
+                color="#333333"
+                name="XP"
+                balance={123.55}
+                type="INVESTMENT"
+              />
+            </SwiperSlide>
 
-              <SwiperSlide>
-                <AccountCard
-                  color="#0f0"
-                  name="Carteira"
-                  balance={1000}
-                  type="CASH"
-                />
-              </SwiperSlide>
-            </div>
+            <SwiperSlide>
+              <AccountCard
+                color="#0f0"
+                name="Carteira"
+                balance={1000}
+                type="CASH"
+              />
+            </SwiperSlide>
           </Swiper>
         </div>
       </div>
