@@ -18,6 +18,7 @@ export function useAccounts() {
     windowWidth,
     areValuesVisible,
     toggleValueVisibility,
-    isLoading: false
+    isLoading: false,
+    accounts: []
   }
 }
