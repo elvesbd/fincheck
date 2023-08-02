@@ -1,13 +1,18 @@
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { FilterIcon, TransactionsIcon } from "../../../../Components/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import { MONTHS } from "../../../../../app/config/constants";
 import { SliderOptions } from "./SliderOptions";
 import { SliderNavigation } from "./SliderNavigation";
-import { formatCurrency } from "../../../../../app/utils";
+import { cn, formatCurrency } from "../../../../../app/utils";
+import { FilterIcon, TransactionsIcon } from "../../../../Components/icons";
 import { CategoryIcon } from "../../../../Components/icons/categories/CategoryIcon";
+import { useTransactions } from "./useTransactions";
+
 
 export function Transactions() {
+  const { areValuesVisible } = useTransactions();
+
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full md:p-10 px-4 py-8 flex flex-col">
       <header className="">
@@ -56,22 +61,10 @@ export function Transactions() {
           </div>
 
           <span
-            className="text-red-800 tracking-[-0.5px] font-medium"
-          >{formatCurrency(123)}</span>
-        </div>
-
-        <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-          <div className="flex-1 flex items-center gap-3">
-            <CategoryIcon type="income" />
-
-            <div>
-              <strong className="font-bold tracking-[-0.5px] block">Pix</strong>
-              <data className="text-sm text-gray-600">04/08/2023</data>
-            </div>
-          </div>
-
-          <span
-            className="text-green-800 tracking-[-0.5px] font-medium"
+            className={cn(
+              "text-red-800 tracking-[-0.5px] font-medium",
+              !areValuesVisible && 'blur-sm'
+            )}
           >{formatCurrency(123)}</span>
         </div>
       </div>
