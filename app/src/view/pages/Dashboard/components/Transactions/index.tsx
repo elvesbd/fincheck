@@ -9,10 +9,11 @@ import { FilterIcon, TransactionsIcon } from "../../../../Components/icons";
 import { CategoryIcon } from "../../../../Components/icons/categories/CategoryIcon";
 import { useTransactions } from "./useTransactions";
 import { Spinner } from "../../../../Components/Spinner";
+import emptyStateImage from '../../../../../assets/empty-state.svg'
 
 
 export function Transactions() {
-  const { areValuesVisible, isLoading } = useTransactions();
+  const { areValuesVisible, isLoading, transactions } = useTransactions();
 
   return (
     <div
@@ -61,23 +62,35 @@ export function Transactions() {
           </header>
 
           <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-              <div className="flex-1 flex items-center gap-3">
-                <CategoryIcon type="expense" />
-
-                <div>
-                  <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
-                  <data className="text-sm text-gray-600">04/08/2023</data>
-                </div>
+            {transactions.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full">
+                <img
+                  src={emptyStateImage}
+                  alt="Imagem de uma mulher com uma lupa informando que não foi encontrado nenhuma transação"
+                />
+                <p className="text-gray-700">Não encontramos nenhuma transação!</p>
               </div>
+            )}
 
-              <span
-                className={cn(
-                  "text-red-800 tracking-[-0.5px] font-medium",
-                  !areValuesVisible && 'blur-sm'
-                )}
-              >{formatCurrency(123)}</span>
-            </div>
+            {transactions.length > 0 && (
+              <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                <div className="flex-1 flex items-center gap-3">
+                  <CategoryIcon type="expense" />
+
+                  <div>
+                    <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
+                    <data className="text-sm text-gray-600">04/08/2023</data>
+                  </div>
+                </div>
+
+                <span
+                  className={cn(
+                    "text-red-800 tracking-[-0.5px] font-medium",
+                    !areValuesVisible && 'blur-sm'
+                  )}
+                >{formatCurrency(123)}</span>
+              </div>
+            )}
           </div>
         </>
       )}
