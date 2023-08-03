@@ -1,7 +1,14 @@
 import * as RdxDropDownMenu from '@radix-ui/react-dropdown-menu';
+import { cn } from '../../../app/utils';
 
 
-function DropDownMenuRoot({ children }: { children: React.ReactNode }) {
+interface DropDownProps {
+  children: React.ReactNode;
+  className?: string;
+  onSelect?: () => void;
+}
+
+function DropDownMenuRoot({ children }: DropDownProps) {
   return (
     <RdxDropDownMenu.Root>
       {children}
@@ -9,7 +16,7 @@ function DropDownMenuRoot({ children }: { children: React.ReactNode }) {
   )
 }
 
-function DropDownMenuTrigger({ children }: { children: React.ReactNode }) {
+function DropDownMenuTrigger({ children }: DropDownProps) {
   return (
     <RdxDropDownMenu.Trigger className="outline-none">
       {children}
@@ -17,11 +24,14 @@ function DropDownMenuTrigger({ children }: { children: React.ReactNode }) {
   )
 }
 
-function DropDownMenuContent({ children }: { children: React.ReactNode }) {
+function DropDownMenuContent({ children, className }: DropDownProps) {
   return (
     <RdxDropDownMenu.Portal>
       <RdxDropDownMenu.Content
-        className="rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]"
+        className={cn(
+          "rounded-2xl p-2 bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] data-[side=bottom]:animate-slide-up-and-fade",
+          className
+        )}
       >
         {children}
       </RdxDropDownMenu.Content>
@@ -29,10 +39,14 @@ function DropDownMenuContent({ children }: { children: React.ReactNode }) {
   )
 }
 
-function DropDownMenuItem({ children }: { children: React.ReactNode }) {
+function DropDownMenuItem({ children, className, onSelect }: DropDownProps) {
   return (
     <RdxDropDownMenu.Item
-      className="min-h-[48px] outline-none flex items-center p-4 text-sm text-gray-800 hover:bg-gray-50 rounded-2xl transition-colors"
+      onSelect={onSelect}
+      className={cn(
+        "min-h-[48px] outline-none flex items-center p-4 text-sm text-gray-800 data-[highlighted]:bg-gray-100 rounded-2xl transition-colors cursor-pointer",
+        className
+      )}
     >
       {children}
     </RdxDropDownMenu.Item>
