@@ -6,13 +6,14 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 interface ModalProps {
   open: boolean;
   title: string;
+  onClose?(): void;
   rightAction?: React.ReactNode;
   children: React.ReactNode;
 }
 
-export function Modal({ open, title, rightAction, children }: ModalProps) {
+export function Modal({ open, title, onClose, rightAction, children }: ModalProps) {
   return (
-    <Dialog.Root open={open}>
+    <Dialog.Root open={open} onOpenChange={onClose}>
       <Dialog.Portal>
         <Dialog.Overlay className={cn(
             "fixed inset-0 bg-black/80 backdrop-blur-sm z-50",
@@ -25,8 +26,8 @@ export function Modal({ open, title, rightAction, children }: ModalProps) {
           )}
         >
           <header className="h-12 flex items-center justify-between text-gray-800">
-            <button className="w-12 h-12">
-              <Cross2Icon className="w-6 h-6"/>
+            <button className="w-12 h-12 flex items-center justify-center outline-none">
+              <Cross2Icon onClick={onClose} className="w-6 h-6"/>
             </button>
 
             <span className="text-lg tracking-[-1px] font-bold">

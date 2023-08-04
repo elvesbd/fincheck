@@ -4,7 +4,6 @@ import { Logo } from "../../Components/Logo";
 import { UserMenu } from "../../Components/UserMenu";
 import { DashboardProvider } from "./components/DashBoardContext";
 import { Fab } from "./components/Fab";
-import { Modal } from "../../Components/Modal";
 
 
 export function Dashboard() {
@@ -28,9 +27,6 @@ export function Dashboard() {
         </main>
 
         <Fab />
-        <Modal open title="Receitas">
-          Content
-        </Modal>
       </div>
     </DashboardProvider>
   )
