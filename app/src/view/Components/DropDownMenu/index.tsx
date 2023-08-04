@@ -19,7 +19,7 @@ function DropDownMenuRoot({ children }: DropDownProps) {
 
 function DropDownMenuTrigger({ children }: DropDownProps) {
   return (
-    <RdxDropDownMenu.Trigger className="outline-none">
+    <RdxDropDownMenu.Trigger className="outline-none" asChild>
       {children}
     </RdxDropDownMenu.Trigger>
   )
