@@ -6,8 +6,6 @@ import { useRegister } from "./useRegister";
 
 export function Register() {
   const { handleSubmit, register, errors, isLoading } = useRegister();
-  console.log('aqui', errors)
-
 
   return (
     <>
