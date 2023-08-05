@@ -1,3 +1,4 @@
+import { InputCurrency } from "../../../../Components/InputCurrency";
 import { Modal } from "../../../../Components/Modal";
 import { useNewAccountModal } from "./useNewAccountModal";
 
@@ -11,6 +12,7 @@ export function NewAccountModal() {
       onClose={closeNewAccountModal}
     >
       New Account Modal
+      <InputCurrency />
     </Modal>
   );
 }
