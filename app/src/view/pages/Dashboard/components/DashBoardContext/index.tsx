@@ -3,12 +3,13 @@ import React, { createContext, useCallback, useMemo, useState } from "react";
 
 interface DashboardContextValue {
   areValuesVisible: boolean;
-  toggleValueVisibility: () => void;
   isNewAccountModalOpen: boolean;
+  isNewTransactionModalOpen: boolean;
+  newTransactionType: 'INCOME' | 'EXPENSE' | null;
+  toggleValueVisibility: () => void;
   openNewAccountModal: () => void;
   closeNewAccountModal: () => void;
-  isNewTransactionModalOpen: boolean;
-  openNewTransactionModal: () => void;
+  openNewTransactionModal: (type: 'INCOME' | 'EXPENSE') => void;
   closeNewTransactionModal: () => void;
 }
 
@@ -18,6 +19,7 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [areValuesVisible, setAreValuesVisible] = useState(true);
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(true);
+  const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null);
 
   const toggleValueVisibility = useCallback(() => {
     setAreValuesVisible(prevState => !prevState)
@@ -31,30 +33,34 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     setIsNewAccountModalOpen(false)
   }, []);
 
-  const openNewTransactionModal = useCallback(() => {
+  const openNewTransactionModal = useCallback((type: 'INCOME' | 'EXPENSE') => {
+    setNewTransactionType(type)
     setIsNewTransactionModalOpen(true)
   }, []);
 
   const closeNewTransactionModal = useCallback(() => {
+    setNewTransactionType(null);
     setIsNewTransactionModalOpen(false)
   }, []);
 
   const contextValue = useMemo(() => ({
     areValuesVisible,
-    toggleValueVisibility,
     isNewAccountModalOpen,
+    isNewTransactionModalOpen,
+    newTransactionType,
+    toggleValueVisibility,
     openNewAccountModal,
     closeNewAccountModal,
-    isNewTransactionModalOpen,
     openNewTransactionModal,
     closeNewTransactionModal
   }), [
     areValuesVisible,
-    toggleValueVisibility,
     isNewAccountModalOpen,
+    isNewTransactionModalOpen,
+    newTransactionType,
+    toggleValueVisibility,
     openNewAccountModal,
     closeNewAccountModal,
-    isNewTransactionModalOpen,
     openNewTransactionModal,
     closeNewTransactionModal
   ]);
