@@ -7,13 +7,17 @@ interface DashboardContextValue {
   isNewAccountModalOpen: boolean;
   openNewAccountModal: () => void;
   closeNewAccountModal: () => void;
+  isNewTransactionModalOpen: boolean;
+  openNewTransactionModal: () => void;
+  closeNewTransactionModal: () => void;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [areValuesVisible, setAreValuesVisible] = useState(true);
-  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(true);
+  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(true);
 
   const toggleValueVisibility = useCallback(() => {
     setAreValuesVisible(prevState => !prevState)
@@ -27,13 +31,33 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     setIsNewAccountModalOpen(false)
   }, []);
 
+  const openNewTransactionModal = useCallback(() => {
+    setIsNewTransactionModalOpen(true)
+  }, []);
+
+  const closeNewTransactionModal = useCallback(() => {
+    setIsNewTransactionModalOpen(false)
+  }, []);
+
   const contextValue = useMemo(() => ({
     areValuesVisible,
     toggleValueVisibility,
     isNewAccountModalOpen,
     openNewAccountModal,
-    closeNewAccountModal
-  }), [areValuesVisible, toggleValueVisibility, isNewAccountModalOpen, openNewAccountModal, closeNewAccountModal]);
+    closeNewAccountModal,
+    isNewTransactionModalOpen,
+    openNewTransactionModal,
+    closeNewTransactionModal
+  }), [
+    areValuesVisible,
+    toggleValueVisibility,
+    isNewAccountModalOpen,
+    openNewAccountModal,
+    closeNewAccountModal,
+    isNewTransactionModalOpen,
+    openNewTransactionModal,
+    closeNewTransactionModal
+  ]);
 
   return (
     <DashboardContext.Provider value={contextValue}>
