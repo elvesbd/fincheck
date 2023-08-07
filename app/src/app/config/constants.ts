@@ -1,3 +1,5 @@
+import { Color } from "./types";
+
 export const MONTHS = [
   'Jan',
   'Fev',
@@ -13,7 +15,7 @@ export const MONTHS = [
   'Dez'
 ];
 
-export const COLORS = [
+export const COLORS: Color[] = [
   { color: '#868E96', bg: '#F8F9FA' },
   { color: '#FA5252', bg: '#FFF5F5' },
   { color: '#E64980', bg: '#FFF0F6' },

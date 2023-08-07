@@ -4,12 +4,7 @@ import { DropDownMenu } from "../DropDownMenu";
 import { ColorIcon } from "../icons/ColorIcon";
 import { COLORS } from "../../../app/config/constants";
 import { useState } from "react";
-
-
-type Color = {
-  color: string;
-  bg: string;
-}
+import { Color } from "../../../app/config/types";
 
 
 interface ColorsDropDownInputProps {
