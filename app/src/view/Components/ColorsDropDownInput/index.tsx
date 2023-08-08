@@ -14,8 +14,10 @@ interface ColorsDropDownInputProps {
   onChange?: (value: string) => void;
 }
 
-export function ColorsDropDownInput({ error, className, onChange }: ColorsDropDownInputProps) {
-  const [selectedColor, setSelectedColor] = useState<null | Color>(null);
+export function ColorsDropDownInput({ error, className, onChange, value }: ColorsDropDownInputProps) {
+  const [selectedColor, setSelectedColor] = useState<null | Color>(() => {
+    return COLORS.find(c => c.color === value) ?? null;
+  });
 
   function handleSelect(color: Color) {
     setSelectedColor(color);

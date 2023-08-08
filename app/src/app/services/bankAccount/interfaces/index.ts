@@ -1,10 +1,14 @@
 import { AccountType } from "../enum";
 
-export interface BankAccountParams {
+export interface CreateBankAccountParams {
   name: string;
   initialBalance: number;
   color: string;
   type: 'CHECKING' | 'INVESTMENT' | 'CASH';
+}
+
+export interface UpdateBankAccountParams extends CreateBankAccountParams {
+  id: string;
 }
 
 export interface BankAccount {

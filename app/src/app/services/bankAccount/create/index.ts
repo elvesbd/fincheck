@@ -1,8 +1,8 @@
 import { httpClient } from "../../httpClient";
-import { BankAccountParams, BankAccount } from "../interfaces";
+import { CreateBankAccountParams, BankAccount } from "../interfaces";
 
 
-export async function create(params: BankAccountParams) {
+export async function create(params: CreateBankAccountParams) {
   const { data } = await httpClient.post<BankAccount>('/bank-accounts', params);
   return data;
 }

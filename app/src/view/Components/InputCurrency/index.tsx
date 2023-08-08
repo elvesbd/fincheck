@@ -5,7 +5,7 @@ import { cn } from '../../../app/utils';
 
 interface InputCurrencyProps {
   error?: string;
-  value?: string;
+  value?: string | number;
   onChange?: (value: string) => void;
 }
 
