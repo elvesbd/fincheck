@@ -10,13 +10,16 @@ import { Color } from "../../../app/config/types";
 interface ColorsDropDownInputProps {
   error?: string;
   className?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
-export function ColorsDropDownInput({ error, className }: ColorsDropDownInputProps) {
+export function ColorsDropDownInput({ error, className, onChange }: ColorsDropDownInputProps) {
   const [selectedColor, setSelectedColor] = useState<null | Color>(null);
 
   function handleSelect(color: Color) {
     setSelectedColor(color);
+    onChange?.(color.color);
   }
 
   return (

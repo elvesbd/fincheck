@@ -1,3 +1,4 @@
+import { Controller } from "react-hook-form";
 import { Button } from "../../../../Components/Button";
 import { ColorsDropDownInput } from "../../../../Components/ColorsDropDownInput";
 import { Input } from "../../../../Components/Input";
@@ -7,7 +8,14 @@ import { Select } from "../../../../Components/Select";
 import { useNewAccountModal } from "./useNewAccountModal";
 
 export function NewAccountModal() {
-  const { isNewAccountModalOpen, closeNewAccountModal } = useNewAccountModal();
+  const {
+    isNewAccountModalOpen,
+    closeNewAccountModal,
+    register,
+    handleSubmit,
+    control,
+    errors
+  } = useNewAccountModal();
 
   return (
     <Modal
@@ -15,12 +23,12 @@ export function NewAccountModal() {
       open={isNewAccountModalOpen}
       onClose={closeNewAccountModal}
     >
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <div>
           <span
             className="text-gray-600 tracking-[-0.5px] text-xs"
           >
-            Saldo
+            Saldo inicial
           </span>
 
           <div className="flex items-center gap-2">
@@ -29,37 +37,68 @@ export function NewAccountModal() {
             >
               R$
             </span>
-            <InputCurrency />
+            <Controller
+              control={control}
+              name="initialBalance"
+              defaultValue="0,00"
+              render={({ field: { onChange, value } }) => (
+                <InputCurrency
+                  error={errors.initialBalance?.message}
+                  onChange={onChange}
+                  value={value}
+                />
+              )}
+            />
           </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-4">
           <Input
             type="text"
-            name="name"
             placeholder="Nome da Conta"
+            error={errors.name?.message}
+            {...register('name')}
           />
 
-          <Select
-            placeholder="Tipo"
-            options={[
-              {
-                value: 'CHECKING',
-                label: 'Conta Corrente'
-              },
-              {
-                value: 'INVESTMENT',
-                label: 'Investimentos'
-              },
-              {
-                value: 'CASH',
-                label: 'Dinheiro Físico'
-              }
-            ]}
+          <Controller
+            control={control}
+            name="type"
+            render={({ field: { onChange, value } }) => (
+              <Select
+                placeholder="Tipo"
+                options={[
+                  {
+                    value: 'CHECKING',
+                    label: 'Conta Corrente'
+                  },
+                  {
+                    value: 'INVESTMENT',
+                    label: 'Investimentos'
+                  },
+                  {
+                    value: 'CASH',
+                    label: 'Dinheiro Físico'
+                  }
+                ]}
+                error={errors.type?.message}
+                onChange={onChange}
+                value={value}
+              />
+            )}
           />
 
-          <ColorsDropDownInput />
-
+          <Controller
+            control={control}
+            name="color"
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <ColorsDropDownInput
+                error={errors.color?.message}
+                onChange={onChange}
+                value={value}
+              />
+            )}
+          />
         </div>
 
         <Button type="submit" className="w-full mt-6">
