@@ -3,6 +3,9 @@ import { useDashboard } from "../../components/DashBoardContext/useDashboard";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-hot-toast';
+import { useMutation } from '@tanstack/react-query';
+import { bankAccount } from '../../../../../app/services/bankAccount';
+import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 
 
 const schema = z.object({
@@ -16,31 +19,39 @@ type FormData = z.infer<typeof schema>;
 
 export function useNewAccountModal() {
   const { isNewAccountModalOpen, closeNewAccountModal } = useDashboard();
-
   const {
     register,
     handleSubmit: hookFormSubmit,
     formState: { errors },
-    control
+    control,
+    reset
    } = useForm<FormData>({
     resolver: zodResolver(schema)
    });
+   const { isLoading, mutateAsync } = useMutation(bankAccount.create);
 
    const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      console.log(data);
+      await mutateAsync({
+        ...data,
+        initialBalance: currencyStringToNumber(data.initialBalance)
+      });
+      toast.success('Conta cadastrada com sucesso!')
+      closeNewAccountModal();
+      reset()
     } catch (error) {
-      toast.error('')
+      toast.error('Erro ao cadastrar a conta!')
     }
    })
 
   return {
     isNewAccountModalOpen,
+    control,
+    errors,
+    isLoading,
     closeNewAccountModal,
     register,
     handleSubmit,
-    control,
-    errors,
   }
 }
 
