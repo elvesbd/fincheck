@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { bankAccount } from '../../../../../app/services/bankAccount';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
+import { useState } from 'react';
 
 
 const schema = z.object({
@@ -21,6 +22,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function useEditAccountModal() {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const {
     isEditAccountModalOpen,
     closeEditAccountModal,
@@ -43,12 +46,12 @@ export function useEditAccountModal() {
    });
 
    const queyClient = useQueryClient();
-   const { isLoading, mutateAsync } = useMutation(bankAccount.update);
+   const { isLoading, mutateAsync: updateAccount } = useMutation(bankAccount.update);
+   const { isLoading: isLoadingRemove, mutateAsync: removeAccount } = useMutation(bankAccount.remove);
 
    const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      console.log('clicou')
-      await mutateAsync({
+      await updateAccount({
         ...data,
         initialBalance: currencyStringToNumber(data.initialBalance),
         id: accountBeingEdited!.id
@@ -62,14 +65,39 @@ export function useEditAccountModal() {
     }
    })
 
+   function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+   }
+
+   function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+   }
+
+   async function handleDeleteAccount() {
+    try {
+      await removeAccount(accountBeingEdited!.id);
+
+      queyClient.invalidateQueries({ queryKey: ['bankAccounts'] })
+      toast.success('Conta deletada com sucesso!')
+      closeEditAccountModal();
+    } catch (error) {
+      toast.error('Erro ao deletar a conta!')
+    }
+   }
+
   return {
     isEditAccountModalOpen,
     control,
     errors,
     isLoading,
+    isDeleteModalOpen,
+    isLoadingRemove,
     closeEditAccountModal,
     register,
     handleSubmit,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDeleteAccount
   }
 }
 
