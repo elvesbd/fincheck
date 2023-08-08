@@ -28,11 +28,11 @@ export function useNewAccountModal() {
    } = useForm<FormData>({
     resolver: zodResolver(schema)
    });
-   const { isLoading, mutateAsync } = useMutation(bankAccount.create);
+  const { isLoading, mutateAsync } = useMutation(bankAccount.create);
 
-   const queyClient = useQueryClient();
+  const queyClient = useQueryClient();
 
-   const handleSubmit = hookFormSubmit(async (data) => {
+  const handleSubmit = hookFormSubmit(async (data) => {
     try {
       await mutateAsync({
         ...data,
@@ -46,7 +46,7 @@ export function useNewAccountModal() {
     } catch (error) {
       toast.error('Erro ao cadastrar a conta!')
     }
-   })
+  })
 
   return {
     isNewAccountModalOpen,
