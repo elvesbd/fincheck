@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { transactions } from "../services/transactions";
 
 export function useTransactions() {
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isInitialLoading } = useQuery({
     queryKey: ['transactions'],
     queryFn: () => transactions.getAll({
       month: 7,
@@ -12,6 +12,7 @@ export function useTransactions() {
 
   return {
     transactions: data ?? [],
-    isFetching
+    isLoading: isFetching,
+    isInitialLoading
   }
 }
