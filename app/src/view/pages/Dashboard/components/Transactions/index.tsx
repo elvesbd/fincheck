@@ -1,16 +1,16 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { MONTHS } from "../../../../../app/config/constants";
+import { FiltersModal } from "./FiltersModal";
 import { SliderOptions } from "./SliderOptions";
 import { SliderNavigation } from "./SliderNavigation";
+import { TransactionDropDown } from "./TransactionDropDown";
+import { useTransactionsController } from "./useTransactions";
 import { cn, formatCurrency } from "../../../../../app/utils";
 import { FilterIcon } from "../../../../Components/icons";
 import { CategoryIcon } from "../../../../Components/icons/categories/CategoryIcon";
-import { useTransactions } from "./useTransactions";
 import { Spinner } from "../../../../Components/Spinner";
 import emptyStateImage from '../../../../../assets/empty-state.svg'
-import { TransactionDropDown } from "./TransactionDropDown";
-import { FiltersModal } from "./FiltersModal";
 
 
 export function Transactions() {
@@ -22,7 +22,7 @@ export function Transactions() {
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal
-  } = useTransactions();
+  } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
 
@@ -90,25 +90,31 @@ export function Transactions() {
               </div>
             )}
 
-            {(hasTransactions && !isLoading) && (
-              <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+            {(hasTransactions && !isLoading) && transactions.map(transaction => (
+              <div key={transaction.id} className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
                 <div className="flex-1 flex items-center gap-3">
-                  <CategoryIcon type="expense" />
+                  <CategoryIcon
+                    type={transaction.type === 'EXPENSE' ? 'expense' : 'income'}
+                    category={transaction.category?.icon}
+                  />
 
                   <div>
-                    <strong className="font-bold tracking-[-0.5px] block">Almoço</strong>
-                    <data className="text-sm text-gray-600">04/08/2023</data>
+                    <strong className="font-bold tracking-[-0.5px] block">{transaction.name}</strong>
+                    <data className="text-sm text-gray-600">{transaction.date}</data>
                   </div>
                 </div>
 
                 <span
                   className={cn(
-                    "text-red-800 tracking-[-0.5px] font-medium",
+                    "tracking-[-0.5px] font-medium",
+                    transaction.type === 'EXPENSE' ? 'text-red-800' : 'text-green-800',
                     !areValuesVisible && 'blur-sm'
                   )}
-                >{formatCurrency(123)}</span>
+                >
+                  {transaction.type === 'EXPENSE' ? '-' : '+'}  {formatCurrency(transaction.value)}
+                </span>
               </div>
-            )}
+            ))}
           </div>
         </>
       )}
