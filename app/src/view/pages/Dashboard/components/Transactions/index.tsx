@@ -16,15 +16,16 @@ import { formatDate } from "../../../../../app/utils/formatDate";
 
 export function Transactions() {
   const {
+    isFiltersModalOpen,
+    filters,
     areValuesVisible,
-    isInitialLoading,
     transactions,
     isLoading,
-    isFiltersModalOpen,
+    isInitialLoading,
     handleChangeFilters,
+    handleApplyFilters,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
-    filters
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -44,6 +45,7 @@ export function Transactions() {
           <FiltersModal
             open={isFiltersModalOpen}
             onClose={handleCloseFiltersModal}
+            onApplyFilters={handleApplyFilters}
           />
 
           <header className="">
