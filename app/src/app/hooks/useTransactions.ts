@@ -5,7 +5,7 @@ import { TransactionFilters } from "../services/transactions/interfaces";
 export function useTransactions(filters: TransactionFilters) {
   const { data, isFetching, isInitialLoading, refetch } = useQuery({
     queryKey: ['transactions'],
-    queryFn: () => transactions.getAll(filters)
+    queryFn: () => transactions.getAll(filters),
   })
 
   return {
