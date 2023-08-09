@@ -1,8 +1,10 @@
 import { httpClient } from "../../httpClient";
-import { Transaction } from "../interfaces";
+import { Transaction, TransactionFilters } from "../interfaces";
 
 
-export async function getAll() {
-  const { data } = await httpClient.get<Transaction[]>('/transactions');
+export async function getAll(filters: TransactionFilters) {
+  const { data } = await httpClient.get<Transaction[]>('/transactions', {
+    params: filters
+  });
   return data;
 }
