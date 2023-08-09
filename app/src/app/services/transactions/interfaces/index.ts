@@ -11,5 +11,12 @@ export interface CreateTransactionParams {
 
 export interface Transaction extends CreateTransactionParams {
   id: string;
-  category: Pick<Category, 'id' | 'name' | 'icon'>;
+  category?: Pick<Category, 'id' | 'name' | 'icon'>;
+}
+
+export interface TransactionFilters {
+  month: number;
+  year: number;
+  bankAccountId?: string;
+  type?: Transaction['type']
 }
