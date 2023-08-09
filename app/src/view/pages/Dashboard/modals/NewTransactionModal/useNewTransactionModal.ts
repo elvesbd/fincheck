@@ -1,14 +1,14 @@
 import * as z from 'zod';
+import { useMemo } from 'react';
+import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useDashboard } from "../../components/DashBoardContext/useDashboard";
 import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts';
 import { useCategories } from '../../../../../app/hooks/useCategories';
-import { useMemo } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transactions } from '../../../../../app/services/transactions';
-import toast from 'react-hot-toast';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 
 
@@ -49,7 +49,7 @@ export function useNewTransactionModal() {
 
   const queyClient = useQueryClient();
 
-   const handleSubmit = hookFormSubmit(async (data) => {
+  const handleSubmit = hookFormSubmit(async (data) => {
     try {
       await mutateAsync({
         ...data,
@@ -73,7 +73,7 @@ export function useNewTransactionModal() {
           : 'Erro ao cadastrar a receita!'
       )
     }
-    })
+  })
 
   const categories = useMemo(() => {
     return categoriesList.filter(category => category.type === newTransactionType)
