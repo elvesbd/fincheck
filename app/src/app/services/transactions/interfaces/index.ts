@@ -1,3 +1,5 @@
+import { Category } from "../../categories/interfaces";
+
 export interface CreateTransactionParams {
   bankAccountId: string;
   categoryId: string;
@@ -7,4 +9,7 @@ export interface CreateTransactionParams {
   type: 'INCOME' | 'EXPENSE'
 }
 
-export interface Transaction {}
+export interface Transaction extends CreateTransactionParams {
+  id: string;
+  category: Pick<Category, 'id' | 'name' | 'icon'>;
+}
