@@ -11,6 +11,7 @@ import { FilterIcon } from "../../../../Components/icons";
 import { CategoryIcon } from "../../../../Components/icons/categories/CategoryIcon";
 import { Spinner } from "../../../../Components/Spinner";
 import emptyStateImage from '../../../../../assets/empty-state.svg'
+import { formatDate } from "../../../../../app/utils/formatDate";
 
 
 export function Transactions() {
@@ -99,8 +100,13 @@ export function Transactions() {
                   />
 
                   <div>
-                    <strong className="font-bold tracking-[-0.5px] block">{transaction.name}</strong>
-                    <data className="text-sm text-gray-600">{transaction.date}</data>
+                    <strong className="font-bold tracking-[-0.5px] block">
+                      {transaction.name}
+                    </strong>
+
+                    <data className="text-sm text-gray-600">
+                      {formatDate(transaction.date)}
+                    </data>
                   </div>
                 </div>
 
