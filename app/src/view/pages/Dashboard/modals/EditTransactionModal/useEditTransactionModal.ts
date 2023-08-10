@@ -96,6 +96,7 @@ export function useEditTransactionModal({ transaction, onClose }: UseEditTransac
       await removeTransaction(transaction!.id);
 
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] })
       toast.success(
         transaction!.type === 'EXPENSE'
           ? 'Despesa deletada com sucesso!'

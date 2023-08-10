@@ -1,8 +1,8 @@
 import { httpClient } from "../../httpClient";
-import { MeResponse } from "../interfaces";
+import { User } from "../interfaces";
 
 
 export async function me() {
-  const { data } = await httpClient.get<MeResponse>('/users/me')
+  const { data } = await httpClient.get<User>('/users/me')
   return data;
 }
