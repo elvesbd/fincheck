@@ -35,7 +35,7 @@ export function useEditAccountModal() {
     handleSubmit: hookFormSubmit,
     formState: { errors },
     control,
-   } = useForm<FormData>({
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       initialBalance: accountBeingEdited?.initialBalance,
@@ -43,13 +43,13 @@ export function useEditAccountModal() {
       type: accountBeingEdited?.type,
       color: accountBeingEdited?.color
     },
-   });
+  });
 
-   const queyClient = useQueryClient();
-   const { isLoading, mutateAsync: updateAccount } = useMutation(bankAccount.update);
-   const { isLoading: isLoadingRemove, mutateAsync: removeAccount } = useMutation(bankAccount.remove);
+  const queryClient = useQueryClient();
+  const { isLoading, mutateAsync: updateAccount } = useMutation(bankAccount.update);
+  const { isLoading: isLoadingRemove, mutateAsync: removeAccount } = useMutation(bankAccount.remove);
 
-   const handleSubmit = hookFormSubmit(async (data) => {
+  const handleSubmit = hookFormSubmit(async (data) => {
     try {
       await updateAccount({
         ...data,
@@ -57,33 +57,33 @@ export function useEditAccountModal() {
         id: accountBeingEdited!.id
       });
 
-      queyClient.invalidateQueries({ queryKey: ['bankAccounts'] })
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] })
       toast.success('Conta editada com sucesso!')
       closeEditAccountModal();
     } catch (error) {
       toast.error('Erro ao salvar as alterações!')
     }
-   })
+  })
 
-   function handleOpenDeleteModal() {
+  function handleOpenDeleteModal() {
     setIsDeleteModalOpen(true);
-   }
+  }
 
-   function handleCloseDeleteModal() {
+  function handleCloseDeleteModal() {
     setIsDeleteModalOpen(false);
-   }
+  }
 
-   async function handleDeleteAccount() {
+  async function handleDeleteAccount() {
     try {
       await removeAccount(accountBeingEdited!.id);
 
-      queyClient.invalidateQueries({ queryKey: ['bankAccounts'] })
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] })
       toast.success('Conta deletada com sucesso!')
       closeEditAccountModal();
     } catch (error) {
       toast.error('Erro ao deletar a conta!')
     }
-   }
+  }
 
   return {
     isEditAccountModalOpen,

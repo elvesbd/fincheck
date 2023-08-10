@@ -5,8 +5,10 @@ import { Input } from "../../../../Components/Input";
 import { Modal } from "../../../../Components/Modal";
 import { Button } from "../../../../Components/Button";
 import { Select } from "../../../../Components/Select";
+import { TrashIcon } from "../../../../Components/icons/TrashIcon";
 import { InputCurrency } from "../../../../Components/InputCurrency";
 import { DatePickerInput } from "../../../../Components/DatePickerInput";
+import { ConfirmDeleteModal } from "../../../../Components/ConfirmDeleteModal";
 import { Transaction } from "../../../../../app/services/transactions/interfaces";
 
 
@@ -20,20 +22,41 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
   const {
     control,
     errors,
-    handleSubmit,
-    register,
     accounts,
     categories,
-    isLoading
-   } = useEditTransactionModal({transaction, onClose});
+    isLoading,
+    isDeleteModalOpen,
+    isLoadingRemove,
+    register,
+    handleSubmit,
+    handleDeleteTransaction,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal
+  } = useEditTransactionModal({transaction, onClose});
 
-   const isExpense = transaction?.type === 'EXPENSE';
+  const isExpense = transaction?.type === 'EXPENSE';
+
+  if (isDeleteModalOpen) {
+    return (
+      <ConfirmDeleteModal
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleDeleteTransaction}
+        isLoading={isLoadingRemove}
+        title={`Tem certeza que deseja excluir esta ${isExpense ? 'despesa' : 'receita'}`}
+      />
+    )
+  }
 
   return (
     <Modal
       title={isExpense ? 'Editar Despesa': 'Editar Receita'}
       open={open}
       onClose={onClose}
+      rightAction={(
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className="w-6 h-6 text-red-900" />
+        </button>
+      )}
     >
       <form onSubmit={handleSubmit}>
         <div>

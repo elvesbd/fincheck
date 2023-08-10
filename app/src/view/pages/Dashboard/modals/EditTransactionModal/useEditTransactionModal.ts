@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -47,14 +47,22 @@ export function useEditTransactionModal({ transaction, onClose }: UseEditTransac
   });
   const { accounts } = useBankAccounts();
   const { categories:  categoriesList } = useCategories();
-  const { isLoading, mutateAsync } = useMutation(transactions.update);
+  const {
+    isLoading,
+    mutateAsync: updateTransaction
+  } = useMutation(transactions.update);
+  const {
+    isLoading: isLoadingRemove,
+    mutateAsync: removeTransaction
+  } = useMutation(transactions.remove);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const queryClient = useQueryClient();
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
       if (!transaction?.id) return;
 
-      await mutateAsync({
+      await updateTransaction({
         ...data,
         id: transaction.id,
         value: currencyStringToNumber(data.value),
@@ -83,14 +91,47 @@ export function useEditTransactionModal({ transaction, onClose }: UseEditTransac
     return categoriesList.filter(category => category.type === transaction?.type)
   }, [categoriesList, transaction])
 
+  async function handleDeleteTransaction() {
+    try {
+      await removeTransaction(transaction!.id);
+
+      queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      toast.success(
+        transaction!.type === 'EXPENSE'
+          ? 'Despesa deletada com sucesso!'
+          : 'Receita deletada com sucesso!'
+      )
+      onClose();
+    } catch (error) {
+      toast.error(
+        transaction?.type === 'EXPENSE'
+          ? 'Erro ao deletar a despesa!'
+          : 'Erro ao deletar a receita!'
+      )
+    }
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
+
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+  }
+
   return {
     errors,
     control,
     accounts,
     categories,
     isLoading,
+    isDeleteModalOpen,
+    isLoadingRemove,
     register,
     handleSubmit,
+    handleDeleteTransaction,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal
   }
 }
 
