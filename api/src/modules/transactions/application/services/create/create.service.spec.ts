@@ -84,5 +84,10 @@ describe('CreateTransactionsService', () => {
         createTransactionDto,
       );
     });
+
+    it('should be return an transaction created on success', async () => {
+      const result = await sut.execute(userId, createTransactionDto);
+      expect(result).toStrictEqual(transaction);
+    });
   });
 });
