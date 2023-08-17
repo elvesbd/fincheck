@@ -66,7 +66,7 @@ describe('CreateTransactionsService', () => {
     };
     const { bankAccountId, categoryId } = createTransactionDto;
 
-    it('should be called validateEntitiesOwnerShipService.execute with correct value', async () => {
+    it('should be called validateEntitiesOwnerShipService.execute with correct values', async () => {
       await sut.execute(userId, createTransactionDto);
       expect(validateEntitiesOwnerShipService.execute).toHaveBeenCalledTimes(1);
       expect(validateEntitiesOwnerShipService.execute).toHaveBeenCalledWith({
@@ -74,6 +74,15 @@ describe('CreateTransactionsService', () => {
         bankAccountId,
         categoryId,
       });
+    });
+
+    it('should be called transactionRepository.create with correct values', async () => {
+      await sut.execute(userId, createTransactionDto);
+      expect(transactionRepository.create).toHaveBeenCalledTimes(1);
+      expect(transactionRepository.create).toHaveBeenCalledWith(
+        userId,
+        createTransactionDto,
+      );
     });
   });
 });
