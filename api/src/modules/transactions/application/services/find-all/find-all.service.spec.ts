@@ -3,6 +3,7 @@ import { FindAllTransactionsService } from './find-all.service';
 import { TransactionsRepository } from 'src/modules/transactions/repository';
 import { TransactionDataBuilder } from 'src/modules/transactions/__mocks__/transaction-builder';
 import { FiltersDto } from 'src/modules/transactions/controllers/find-all/dto/filters.dto';
+import { TransactionType } from 'src/modules/transactions/enum';
 
 describe('FindAllTransactionsService', () => {
   let sut: FindAllTransactionsService;
@@ -11,6 +12,10 @@ describe('FindAllTransactionsService', () => {
   const transaction = TransactionDataBuilder.aTransaction().build();
   const transactionWithDifferentBankAccount =
     TransactionDataBuilder.aTransaction().withDifferentBankAccountId().build();
+  const transactionWithDifferentTransactionType =
+    TransactionDataBuilder.aTransaction()
+      .withDifferentTransactionType()
+      .build();
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -71,6 +76,23 @@ describe('FindAllTransactionsService', () => {
 
       const result = await sut.execute(userId, filtersWithDifferentBankAccount);
       expect(result).toStrictEqual([transactionWithDifferentBankAccount]);
+    });
+
+    it('ensures be returns transactions according to the transaction type informed in the filter', async () => {
+      const filtersWithDifferentTransactionType: FiltersDto = {
+        ...filters,
+        type: TransactionType.INCOME,
+      };
+
+      jest
+        .spyOn(transactionRepository, 'findAll')
+        .mockResolvedValueOnce([transactionWithDifferentTransactionType]);
+
+      const result = await sut.execute(
+        userId,
+        filtersWithDifferentTransactionType,
+      );
+      expect(result).toStrictEqual([transactionWithDifferentTransactionType]);
     });
   });
 });

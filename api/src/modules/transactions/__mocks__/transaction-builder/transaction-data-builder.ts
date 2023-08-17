@@ -30,6 +30,19 @@ export class TransactionDataBuilder {
     return this;
   }
 
+  withDifferentTransactionType(
+    this: TransactionDataBuilder,
+  ): TransactionDataBuilder {
+    this.transactionResponseDto.id = '88630b0d-1a82-49bf-ba87-be74145069z2';
+    this.transactionResponseDto.value = 1000;
+    this.transactionResponseDto.type = 'INCOME';
+    this.transactionResponseDto.userId = 'f129f8f4-804e-4816-b799-46044d86781k';
+    this.transactionResponseDto.bankAccountId =
+      'b013f8f4-804e-4816-b799-46044d86832a';
+    this.transactionResponseDto.name = 'Bônus';
+    return this;
+  }
+
   build(): TransactionResponseDto {
     return this.transactionResponseDto;
   }
