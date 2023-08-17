@@ -35,5 +35,20 @@ describe('FindAllTransactionsService', () => {
     expect(transactionRepository).toBeDefined();
   });
 
-  describe('execute()', () => {});
+  describe('execute()', () => {
+    const userId = 'b013f8f4-804e-4816-b799-46044d86816c';
+    const filters: FiltersDto = {
+      month: 0,
+      year: 0,
+    };
+
+    it('should be called transactionRepository.findAll with correct values', async () => {
+      await sut.execute(userId, filters);
+      expect(transactionRepository.findAll).toHaveBeenCalledTimes(1);
+      expect(transactionRepository.findAll).toHaveBeenCalledWith(
+        userId,
+        filters,
+      );
+    });
+  });
 });
