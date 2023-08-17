@@ -44,6 +44,6 @@ export class FindAllTransactionsController {
     type: TransactionType,
   ): Promise<TransactionResponseDto[]> {
     const filters: FiltersDto = { month, year, bankAccountId, type };
-    return this.findAllTransactionsService.findAll(userId, filters);
+    return this.findAllTransactionsService.execute(userId, filters);
   }
 }

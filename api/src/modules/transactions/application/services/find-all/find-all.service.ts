@@ -10,7 +10,7 @@ export class FindAllTransactionsService {
     private readonly transactionRepository: TransactionsRepository,
   ) {}
 
-  async findAll(
+  async execute(
     userId: string,
     filters: FiltersDto,
   ): Promise<TransactionResponseDto[]> {
