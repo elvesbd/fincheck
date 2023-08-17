@@ -9,6 +9,9 @@ describe('FindAllTransactionsService', () => {
   let transactionRepository: TransactionsRepository;
 
   const transaction = TransactionDataBuilder.aTransaction().build();
+  const transactionWithDifferentAccount = TransactionDataBuilder.aTransaction()
+    .withDifferentBankAccountId()
+    .build();
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -55,6 +58,17 @@ describe('FindAllTransactionsService', () => {
       const result = await sut.execute(userId, filters);
       expect(result[0].date.getMonth() + 1).toBe(filters.month);
       expect(result[0].date.getFullYear()).toBe(filters.year);
+    });
+
+    it('ensures be returns transactions according to the bank account id informed in the filter', async () => {
+      filters.bankAccountId = 'a540f8f4-804e-4816-b799-46044d86851c';
+
+      jest
+        .spyOn(transactionRepository, 'findAll')
+        .mockResolvedValueOnce([transactionWithDifferentAccount]);
+
+      const result = await sut.execute(userId, filters);
+      expect(result).toStrictEqual([transactionWithDifferentAccount]);
     });
   });
 });
