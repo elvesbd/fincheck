@@ -31,6 +31,6 @@ export class CreateTransactionsController {
     @ExtractUserId() userId: string,
     @Body() createTransactionDto: CreateTransactionDto,
   ): Promise<TransactionResponseDto> {
-    return this.createTransactionsService.create(userId, createTransactionDto);
+    return this.createTransactionsService.execute(userId, createTransactionDto);
   }
 }

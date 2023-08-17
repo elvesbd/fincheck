@@ -12,7 +12,7 @@ export class CreateTransactionsService {
     private readonly validateEntitiesOwnerShipService: ValidateEntitiesOwnerShipService,
   ) {}
 
-  async create(
+  async execute(
     userId: string,
     createTransactionDto: CreateTransactionDto,
   ): Promise<TransactionResponseDto> {
