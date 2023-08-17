@@ -2,11 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreateTransactionsService } from './create.service';
 import { TransactionsRepository } from 'src/modules/transactions/repository';
 import { ValidateEntitiesOwnerShipService } from '../../domain';
+import { TransactionDataBuilder } from 'src/modules/transactions/__mocks__/transaction-builder';
 
 describe('CreateTransactionsService', () => {
   let sut: CreateTransactionsService;
   let transactionRepository: TransactionsRepository;
   let validateEntitiesOwnerShipService: ValidateEntitiesOwnerShipService;
+
+  const transaction = TransactionDataBuilder.aTransaction().build();
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -14,7 +17,7 @@ describe('CreateTransactionsService', () => {
     const TransactionsRepositoryProvider = {
       provide: 'TRANSACTIONS_REPOSITORY',
       useValue: {
-        create: jest.fn(),
+        create: jest.fn().mockResolvedValue(transaction),
       },
     };
 
