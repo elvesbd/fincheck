@@ -38,8 +38,8 @@ describe('FindAllTransactionsService', () => {
   describe('execute()', () => {
     const userId = 'b013f8f4-804e-4816-b799-46044d86816c';
     const filters: FiltersDto = {
-      month: 0,
-      year: 0,
+      month: 8,
+      year: 2023,
     };
 
     it('should be called transactionRepository.findAll with correct values', async () => {
@@ -49,6 +49,12 @@ describe('FindAllTransactionsService', () => {
         userId,
         filters,
       );
+    });
+
+    it('ensures be returns transactions according to the month and year informed in the filter', async () => {
+      const result = await sut.execute(userId, filters);
+      expect(result[0].date.getMonth() + 1).toBe(filters.month);
+      expect(result[0].date.getFullYear()).toBe(filters.year);
     });
   });
 });
