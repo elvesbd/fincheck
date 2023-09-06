@@ -61,5 +61,11 @@ describe('RemoveTransactionsService', () => {
         transactionId,
       });
     });
+
+    it('should be called transactionRepository.remove with correct value', async () => {
+      await sut.execute(transactionId, userId);
+      expect(transactionRepository.remove).toHaveBeenCalledTimes(1);
+      expect(transactionRepository.remove).toHaveBeenCalledWith(transactionId);
+    });
   });
 });
