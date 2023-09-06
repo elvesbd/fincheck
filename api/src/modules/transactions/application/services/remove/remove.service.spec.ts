@@ -48,4 +48,18 @@ describe('RemoveTransactionsService', () => {
     expect(transactionRepository).toBeDefined();
     expect(validateEntitiesOwnerShipService).toBeDefined();
   });
+
+  describe('execute', () => {
+    const transactionId = '73620b0d-1a82-49bf-ba87-be74145052e9';
+    const userId = 'b013f8f4-804e-4816-b799-46044d86816c';
+
+    it('should be called validateEntitiesOwnerShipService.execute with correct values', async () => {
+      await sut.execute(transactionId, userId);
+      expect(validateEntitiesOwnerShipService.execute).toHaveBeenCalledTimes(1);
+      expect(validateEntitiesOwnerShipService.execute).toHaveBeenCalledWith({
+        userId,
+        transactionId,
+      });
+    });
+  });
 });
