@@ -21,7 +21,7 @@ describe('UpdateTransactionsService', () => {
     const TransactionsRepositoryProvider = {
       provide: 'TRANSACTIONS_REPOSITORY',
       useValue: {
-        update: jest.fn().mockResolvedValue(transaction),
+        update: jest.fn().mockResolvedValue(transactionUpdated),
       },
     };
 
@@ -78,6 +78,15 @@ describe('UpdateTransactionsService', () => {
         categoryId,
         transactionId,
       });
+    });
+
+    it('should be return an transaction updated on success', async () => {
+      const result = await sut.execute(
+        transactionId,
+        userId,
+        updateTransactionDto,
+      );
+      expect(result).toStrictEqual(transactionUpdated);
     });
   });
 });
