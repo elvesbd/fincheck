@@ -37,7 +37,7 @@ export class UpdateTransactionDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
-  date: string;
+  date: Date;
 
   @ApiProperty()
   @IsNotEmpty()

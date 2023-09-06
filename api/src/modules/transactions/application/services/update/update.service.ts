@@ -12,7 +12,7 @@ export class UpdateTransactionsService {
     private readonly validateEntitiesOwnerShipService: ValidateEntitiesOwnerShipService,
   ) {}
 
-  async update(
+  async execute(
     transactionId: string,
     userId: string,
     updateTransactionDto: UpdateTransactionDto,

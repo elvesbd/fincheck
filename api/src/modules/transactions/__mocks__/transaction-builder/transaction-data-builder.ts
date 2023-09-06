@@ -43,6 +43,12 @@ export class TransactionDataBuilder {
     return this;
   }
 
+  updated(this: TransactionDataBuilder): TransactionDataBuilder {
+    this.transactionResponseDto.name = 'Internet';
+    this.transactionResponseDto.value = 100;
+    return this;
+  }
+
   build(): TransactionResponseDto {
     return this.transactionResponseDto;
   }
