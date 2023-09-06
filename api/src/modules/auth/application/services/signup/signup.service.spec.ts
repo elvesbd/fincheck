@@ -7,9 +7,9 @@ import {
 import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
 import { Encrypt } from 'src/shared/adapters/cryptography/jwt';
 import { UserResponseDto } from 'src/modules/users/dto';
-import { UserDataBuilder } from 'src/modules/users/__mocks__/data-builder';
 import { SignupDto } from 'src/modules/auth/dto/signup';
 import { ConflictException } from '@nestjs/common';
+import { UserDataBuilder } from 'src/modules/users/__mocks__/user-builder';
 
 const user: UserResponseDto = UserDataBuilder.aUser().build();
 const accessToken =
@@ -103,13 +103,13 @@ describe('SignupService', () => {
 
     it('should be ensures that generatePasswordHash is called with the correct parameters', async () => {
       await sut.execute(signupDto);
-      expect(hasher.hash).toHaveBeenCalledTimes(2);
+      expect(hasher.hash).toHaveBeenCalledTimes(1);
       expect(hasher.hash).toHaveBeenCalledWith(signupDto.password, 10);
     });
 
     it('should be ensures that generateToken is called with the correct parameters', async () => {
       await sut.execute(signupDto);
-      expect(encrypt.signAsync).toHaveBeenCalledTimes(3);
+      expect(encrypt.signAsync).toHaveBeenCalledTimes(1);
       expect(encrypt.signAsync).toHaveBeenCalledWith({ sub: user.id });
     });
 

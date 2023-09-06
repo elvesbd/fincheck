@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SigninService } from './signin.service';
 import { GetUserByEmailService } from 'src/modules/users/application/services';
 import { UserResponseDto } from 'src/modules/users/dto';
-import { UserDataBuilder } from 'src/modules/users/__mocks__/data-builder';
 import { UnauthorizedException } from '@nestjs/common';
 import { SigninDto } from 'src/modules/auth/dto/signin';
 import { Encrypt } from 'src/shared/adapters/cryptography/jwt';
 import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
+import { UserDataBuilder } from 'src/modules/users/__mocks__/user-builder';
 
 describe('SigninService', () => {
   let sut: SigninService;
