@@ -1,18 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ValidateTransactionsOwnershipService } from './validate-transactions-ownership.service';
 import { TransactionsRepository } from '../../repository';
-import { TransactionResponseDto } from '../../dto';
 import { NotFoundException } from '@nestjs/common';
+import { TransactionDataBuilder } from '../../__mocks__/transaction-builder';
 
 describe('ValidateTransactionsOwnershipService', () => {
   let sut: ValidateTransactionsOwnershipService;
   let transactionRepository: TransactionsRepository;
 
-  const transaction: TransactionResponseDto = {
-    id: 'f791fb59-c696-4aa0-a472-7115a185ad25',
-    value: 0,
-    type: 'INCOME',
-  };
+  const transaction = TransactionDataBuilder.aTransaction();
 
   beforeEach(async () => {
     jest.clearAllMocks();
