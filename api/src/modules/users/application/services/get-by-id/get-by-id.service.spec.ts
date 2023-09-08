@@ -31,4 +31,14 @@ describe('GetUserByIdService', () => {
     expect(sut).toBeDefined();
     expect(userRepository).toBeDefined();
   });
+
+  describe('execute()', () => {
+    const id = 'b013f8f4-804e-4816-b799-46044d86816c';
+
+    it('should be called userRepository.getByEmail with correct value', async () => {
+      await sut.execute(id);
+      expect(userRepository.getById).toHaveBeenCalledTimes(1);
+      expect(userRepository.getById).toHaveBeenCalledWith(id);
+    });
+  });
 });
