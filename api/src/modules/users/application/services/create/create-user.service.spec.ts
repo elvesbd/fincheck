@@ -3,6 +3,7 @@ import { CreateUserService } from './create-user.service';
 import { UserRepository } from 'src/modules/users/repository';
 import { UserDataBuilder } from 'src/modules/users/__mocks__/user-builder';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UserRegistrationException } from 'src/modules/users/exceptions';
 
 describe('CreateUserService', () => {
   let sut: CreateUserService;
@@ -44,6 +45,14 @@ describe('CreateUserService', () => {
       await sut.execute(createUserDto);
       expect(userRepository.create).toHaveBeenCalledTimes(1);
       expect(userRepository.create).toHaveBeenCalledWith(createUserDto);
+    });
+
+    it('should be return an exception if unable to complete registration', async () => {
+      jest.spyOn(userRepository, 'create').mockResolvedValueOnce(null);
+
+      await expect(sut.execute(createUserDto)).rejects.toThrow(
+        new UserRegistrationException(),
+      );
     });
   });
 });
