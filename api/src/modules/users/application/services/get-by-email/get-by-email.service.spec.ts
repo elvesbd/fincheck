@@ -40,5 +40,10 @@ describe('GetUserByEmailService', () => {
       expect(userRepository.getByEmail).toHaveBeenCalledTimes(1);
       expect(userRepository.getByEmail).toHaveBeenCalledWith(email);
     });
+
+    it('should be return an user on success', async () => {
+      const result = await sut.execute(email);
+      expect(result).toStrictEqual(user);
+    });
   });
 });
