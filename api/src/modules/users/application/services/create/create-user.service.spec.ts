@@ -54,5 +54,10 @@ describe('CreateUserService', () => {
         new UserRegistrationException(),
       );
     });
+
+    it('should be return an user created on success', async () => {
+      const result = await sut.execute(createUserDto);
+      expect(result).toStrictEqual(user);
+    });
   });
 });
