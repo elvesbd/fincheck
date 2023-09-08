@@ -3,7 +3,7 @@ import { SigninService } from './signin.service';
 import { GetUserByEmailService } from 'src/modules/users/application/services';
 import { UserResponseDto } from 'src/modules/users/dto';
 import { UnauthorizedException } from '@nestjs/common';
-import { SigninDto } from 'src/modules/auth/dto/signin';
+import { SigninDto, SigninResponseDto } from 'src/modules/auth/dto/signin';
 import { Encrypt } from 'src/shared/adapters/cryptography/jwt';
 import { Hasher } from 'src/shared/adapters/cryptography/bcrypt';
 import { UserDataBuilder } from 'src/modules/users/__mocks__/user-builder';
@@ -110,9 +110,10 @@ describe('SigninService', () => {
     });
 
     it('should be return an access token on success', async () => {
+      const signinResponseDto: SigninResponseDto = { accessToken };
       const result = await sut.execute(signinDto);
       expect(result).toBeDefined();
-      expect(result).toStrictEqual({ accessToken });
+      expect(result).toStrictEqual(signinResponseDto);
     });
   });
 });
