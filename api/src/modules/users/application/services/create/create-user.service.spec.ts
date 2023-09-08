@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreateUserService } from './create-user.service';
 import { UserRepository } from 'src/modules/users/repository';
 import { UserDataBuilder } from 'src/modules/users/__mocks__/user-builder';
+import { CreateUserDto } from './dto/create-user.dto';
 
 describe('CreateUserService', () => {
   let sut: CreateUserService;
@@ -30,5 +31,19 @@ describe('CreateUserService', () => {
   it('should be defined', () => {
     expect(sut).toBeDefined();
     expect(userRepository).toBeDefined();
+  });
+
+  describe('execute()', () => {
+    const createUserDto: CreateUserDto = {
+      name: 'John Doe',
+      email: 'john@mail.com',
+      password: '123456',
+    };
+
+    it('should be called userRepository.create with correct value', async () => {
+      await sut.execute(createUserDto);
+      expect(userRepository.create).toHaveBeenCalledTimes(1);
+      expect(userRepository.create).toHaveBeenCalledWith(createUserDto);
+    });
   });
 });
