@@ -38,5 +38,5 @@ export class TransactionResponseDto {
   type: string;
 
   @ApiProperty({ type: Category })
-  category: Category;
+  category?: Category;
 }

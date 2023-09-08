@@ -9,31 +9,11 @@ describe('FindAllBankAccountsService', () => {
   let sut: FindAllBankAccountsService;
   let bankAccountsRepository: BankAccountsRepository;
 
-  const bankAccount: BankAccountResponseDto =
+  const bankAccounts: BankAccountDto =
     BankAccountDataBuilder.aBankAccount().build();
-  const bankAccounts: BankAccountDto = {
-    ...bankAccount,
-    transactions: [
-      {
-        id: 'a213f8f4-804e-4816-b799-46044d78551a',
-        type: 'INCOME',
-        value: 1000,
-      },
-    ],
-  };
 
-  const bankAccountWithInitialBalance: BankAccountResponseDto =
-    BankAccountDataBuilder.aBankAccount().withInitialBalance().build();
-  const bankAccountsWithInitialBalance: BankAccountDto = {
-    ...bankAccountWithInitialBalance,
-    transactions: [
-      {
-        id: 'b172f8f4-804e-4816-b799-46122d86825c',
-        type: 'EXPENSE',
-        value: 500,
-      },
-    ],
-  };
+  const bankAccountWithUpdated: BankAccountDto =
+    BankAccountDataBuilder.aBankAccount().withUpdates().build();
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -76,15 +56,15 @@ describe('FindAllBankAccountsService', () => {
     it('should return a bank account with the current balance calculated when there are EXPENSE type transactions', async () => {
       jest
         .spyOn(bankAccountsRepository, 'findTransactionsByUserId')
-        .mockResolvedValueOnce([bankAccountsWithInitialBalance]);
+        .mockResolvedValueOnce([bankAccountWithUpdated]);
 
       const result = await sut.execute(id);
-      expect(result[0].currentBalance).toBe(500);
+      expect(result[0].currentBalance).toBe(6000);
     });
 
     it('should return a bank account with the current balance calculated when there are INCOME type transactions', async () => {
       const result = await sut.execute(id);
-      expect(result[0].currentBalance).toBe(1000);
+      expect(result[0].currentBalance).toBe(4000);
     });
   });
 });

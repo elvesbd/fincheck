@@ -32,7 +32,7 @@ export class UpdateTransactionsController {
     @ExtractUserId() userId: string,
     @Body() updateTransactionDto: UpdateTransactionDto,
   ): Promise<TransactionResponseDto> {
-    return this.updateTransactionsService.update(
+    return this.updateTransactionsService.execute(
       transactionId,
       userId,
       updateTransactionDto,
